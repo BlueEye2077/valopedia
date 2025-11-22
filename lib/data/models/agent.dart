@@ -1,3 +1,6 @@
+import 'package:valopedia/data/models/ability.dart';
+import 'package:valopedia/data/models/role.dart';
+
 class Agent {
   String? uuid;
   String? displayName;
@@ -24,9 +27,9 @@ class Agent {
   bool? isAvailableForTest;
   bool? isBaseContent;
 
-  Map<String, dynamic>? role;
+  Role? role;
 
-  List<dynamic>? abilities;
+  late List<Ability> abilities;
 
   Agent.fromJson(Map<String, dynamic> json) {
     uuid = json["uuid"] as String?;
@@ -56,8 +59,10 @@ class Agent {
     isAvailableForTest = json["isAvailableForTest"] as bool?;
     isBaseContent = json["isBaseContent"] as bool?;
 
-    role = json["role"] as Map<String, dynamic>?;
+    role = Role.fromJson(json["role"]);
 
-    abilities = json["abilities"] as List<dynamic>?;
+    abilities = (json["abilities"] as List)
+        .map((ability) => Ability.fromJson(ability))
+        .toList();
   }
 }

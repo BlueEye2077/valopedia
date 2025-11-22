@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:valopedia/constants/my_colors.dart';
 import 'package:valopedia/constants/my_fonts.dart';
+import 'package:valopedia/constants/strings.dart';
 
 import 'package:valopedia/data/models/agent.dart';
 
@@ -20,7 +21,7 @@ class AgentItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              agent.role?["displayName"] ?? "Unknown",
+              agent.role!.displayName,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: MyFonts.fontDrukWideStyle,
@@ -44,24 +45,30 @@ class AgentItem extends StatelessWidget {
           alignment: Alignment.center,
           fit: StackFit.expand,
           children: [
-            Image.network(agent.background ?? ""),
-
             CachedNetworkImage(
-              height: double.infinity,
-              width: double.infinity,
-              alignment: Alignment.center,
-              //   filterQuality: FilterQuality.low,
-              fit: BoxFit.cover,
-              imageUrl:
-                  agent.fullPortrait ??
-                  agent.fullPortraitV2 ??
-                  agent.bustPortrait ??
-                  "",
+              imageUrl: agent.background ?? "",
+              fit: .cover,
+              errorWidget: (context, url, error) =>
+                  Container(color: MyColors.myGrey),
+            ),
 
-              errorWidget: (context, url, error) => const Icon(Icons.error),
+            Hero(
+              tag: agent.uuid!,
 
-              placeholder: (context, url) =>
-                  Image.asset("assets/images/jet.gif", fit: BoxFit.cover),
+              child: CachedNetworkImage(
+                height: double.infinity,
+                width: double.infinity,
+                alignment: Alignment.center,
+                fit: BoxFit.cover,
+                imageUrl:
+                    agent.fullPortrait ??
+                    agent.fullPortraitV2 ??
+                    agent.bustPortrait ??
+                    "",
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+                placeholder: (context, url) =>
+                    Image.asset("assets/images/jet.gif", fit: BoxFit.cover),
+              ),
             ),
           ],
         ),
@@ -71,32 +78,37 @@ class AgentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(1),
-      margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
-      height: double.infinity,
-      width: double.infinity,
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [MyColors.myRed, Colors.transparent],
-          begin: Alignment.centerRight,
-          end: Alignment.centerLeft,
-        ),
-        // border: Border.all(width: 1),
-      ),
+    return InkWell(
+      onTap: () =>
+          Navigator.pushNamed(context, detailsScreen, arguments: agent),
 
       child: Container(
+        padding: const EdgeInsets.all(1),
+        // margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
+        margin: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+        height: double.infinity,
+        width: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [MyColors.myGrey, Colors.transparent],
+            colors: [MyColors.myRed, Colors.transparent],
             begin: Alignment.centerRight,
             end: Alignment.centerLeft,
           ),
         ),
 
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [buildRotatedText(), buildAgentImage()],
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [MyColors.myGrey, Colors.transparent],
+              begin: Alignment.centerRight,
+              end: Alignment.centerLeft,
+            ),
+          ),
+
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [buildRotatedText(), buildAgentImage()],
+          ),
         ),
       ),
     );

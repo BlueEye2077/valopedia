@@ -15,4 +15,6 @@ class MyFonts {
     color: Colors.red,
     fontWeight: FontWeight.bold,
   );
+
+  
 }
