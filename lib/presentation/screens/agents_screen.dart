@@ -165,12 +165,8 @@ class _AgentScreenState extends State<AgentsScreen> {
     return Scaffold(
       backgroundColor: MyColors.myGrey,
       appBar: AppBar(
-        leading: _isSearching
-            ? IconButton(
-                onPressed: _stopSearching,
-                icon: const Icon(Icons.arrow_back, color: MyColors.myWhite),
-              )
-            : Container(),
+        iconTheme: const IconThemeData(color: MyColors.myWhite),
+
         title: _isSearching ? _buildSearchField() : _buildAppBarTitle(),
         backgroundColor: const Color.fromARGB(255, 55, 5, 10),
         actions: _buildAppBarActions(),

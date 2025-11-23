@@ -137,7 +137,6 @@ class DetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.myGrey,
-      // backgroundColor: MyColors.mySilver,
       body: CustomScrollView(
         slivers: [_buildSliverAppBar(), _buildSliverBody()],
       ),

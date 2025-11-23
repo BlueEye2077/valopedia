@@ -20,7 +20,9 @@ class AbilityTile extends StatelessWidget {
       ),
       subtitleTextStyle: const TextStyle(
         color: MyColors.mySilver,
-        fontSize: 14,
+        fontWeight: .bold,
+        fontSize: 13
+        ,
       ),
     );
   }

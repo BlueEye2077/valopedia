@@ -49,7 +49,7 @@ class RoleCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 15),
             const DetailsDivider(
               color: MyColors.myWhite,
               thickness: 3,
