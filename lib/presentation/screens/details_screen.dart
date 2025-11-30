@@ -1,17 +1,24 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:valopedia/business_logic/cubit/favourites_cubit/cubit/favourites_cubit.dart';
 import 'package:valopedia/constants/my_colors.dart';
 import 'package:valopedia/data/models/agent.dart';
 import 'package:valopedia/presentation/widgets/ability_tile.dart';
 import 'package:valopedia/presentation/widgets/details_divider.dart';
 import 'package:valopedia/presentation/widgets/role_card.dart';
 
-class DetailsScreen extends StatelessWidget {
+class DetailsScreen extends StatefulWidget {
   final Agent agent;
 
   const DetailsScreen({super.key, required this.agent});
 
+  @override
+  State<DetailsScreen> createState() => _DetailsScreenState();
+}
+
+class _DetailsScreenState extends State<DetailsScreen> {
   // Image Stack
   Widget _buildFlexibleSpaceBarBackground() {
     return Stack(
@@ -24,10 +31,10 @@ class DetailsScreen extends StatelessWidget {
           image: const AssetImage("assets/images/background2.jpg"),
         ),
         Hero(
-          tag: agent.uuid!,
+          tag: widget.agent.uuid!,
 
           child: CachedNetworkImage(
-            imageUrl: agent.fullPortrait!,
+            imageUrl: widget.agent.fullPortrait!,
             fit: BoxFit.cover,
             placeholder: (context, url) =>
                 Image.asset("assets/images/jet.gif", fit: BoxFit.cover),
@@ -40,7 +47,24 @@ class DetailsScreen extends StatelessWidget {
 
   // App Bar
   Widget _buildSliverAppBar() {
+    bool isFav = BlocProvider.of<FavouritesCubit>(
+      context,
+    ).isFavourite(widget.agent);
+    // bool isFav =
     return SliverAppBar(
+      actions: [
+        IconButton(
+          onPressed: () {
+            BlocProvider.of<FavouritesCubit>(
+              context,
+            ).toggleFavorites(widget.agent);
+            
+          },
+          icon: isFav
+              ? const Icon(Icons.favorite_sharp)
+              : const Icon(Icons.favorite_outline_sharp),
+        ),
+      ],
       iconTheme: const IconThemeData(color: MyColors.myWhite),
       expandedHeight: 600,
       pinned: true,
@@ -50,7 +74,7 @@ class DetailsScreen extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         background: _buildFlexibleSpaceBarBackground(),
         title: Text(
-          agent.displayName!,
+          widget.agent.displayName!,
           style: const TextStyle(letterSpacing: 12, color: MyColors.myWhite),
           softWrap: true,
           overflow: .ellipsis,
@@ -97,7 +121,9 @@ class DetailsScreen extends StatelessWidget {
         crossAxisAlignment: .start,
         children: [
           _buildSectionTitle("Abilities"),
-          ...agent.abilities.map((ability) => AbilityTile(ability: ability)),
+          ...widget.agent.abilities.map(
+            (ability) => AbilityTile(ability: ability),
+          ),
         ],
       ),
     );
@@ -119,10 +145,13 @@ class DetailsScreen extends StatelessWidget {
                 endIndent: 0,
               ),
 
-              _buildSectionWithDescription("Biography", agent.description!),
+              _buildSectionWithDescription(
+                "Biography",
+                widget.agent.description!,
+              ),
               const DetailsDivider(),
 
-              RoleCard(agent: agent),
+              RoleCard(agent: widget.agent),
               const DetailsDivider(),
 
               _buildAbilitesSection(),
@@ -134,11 +163,20 @@ class DetailsScreen extends StatelessWidget {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.myGrey,
-      body: CustomScrollView(
-        slivers: [_buildSliverAppBar(), _buildSliverBody()],
+      body: BlocBuilder<FavouritesCubit, FavouritesState>(
+        builder: (context, state) {
+          return CustomScrollView(
+            slivers: [_buildSliverAppBar(), _buildSliverBody()],
+          );
+        },
       ),
     );
   }

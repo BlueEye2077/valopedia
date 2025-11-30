@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:valopedia/business_logic/cubit/cubit/agents_cubit.dart';
 import 'package:valopedia/constants/my_colors.dart';
 import 'package:valopedia/data/models/agent.dart';
 import 'package:valopedia/presentation/widgets/agent_item.dart';
+import 'package:valopedia/presentation/widgets/app_drawer.dart';
+import 'package:valopedia/presentation/widgets/app_loading_indicator.dart';
+import 'package:valopedia/presentation/widgets/interactive_app_bar.dart';
 
 class AgentsScreen extends StatefulWidget {
   const AgentsScreen({super.key});
@@ -15,10 +17,7 @@ class AgentsScreen extends StatefulWidget {
 
 class _AgentScreenState extends State<AgentsScreen> {
   late List<Agent> allAgents;
-
-  List<Agent> _searchedAgents = [];
-  bool _isSearching = false;
-  final TextEditingController _textController = TextEditingController();
+  late List<Agent> searchedAgents;
 
   @override
   void initState() {
@@ -31,10 +30,11 @@ class _AgentScreenState extends State<AgentsScreen> {
       builder: (context, state) {
         if (state is AgentsLoaded) {
           allAgents = (state).agents;
+          searchedAgents = (state).searchedAgents;
 
           return buildAgentsScreen();
         } else {
-          return showLoadingIndicator();
+          return const AppLoadingIndicator();
         }
       },
     );
@@ -50,8 +50,8 @@ class _AgentScreenState extends State<AgentsScreen> {
         addRepaintBoundaries: true,
         shrinkWrap: true,
 
-        itemCount: _searchedAgents.isNotEmpty
-            ? _searchedAgents.length
+        itemCount: searchedAgents.isNotEmpty
+            ? searchedAgents.length
             : allAgents.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
@@ -62,115 +62,25 @@ class _AgentScreenState extends State<AgentsScreen> {
         padding: EdgeInsets.zero,
         itemBuilder: (context, index) => AgentItem(
           key: ValueKey(
-            _searchedAgents.isNotEmpty
-                ? _searchedAgents[index].uuid
+            searchedAgents.isNotEmpty
+                ? searchedAgents[index].uuid
                 : allAgents[index].uuid,
           ),
-          agent: _searchedAgents.isNotEmpty
-              ? _searchedAgents[index]
+          agent: searchedAgents.isNotEmpty
+              ? searchedAgents[index]
               : allAgents[index],
         ),
       ),
     );
   }
 
-  Widget showLoadingIndicator() {
-    return const Center(
-      child: CircularProgressIndicator(color: MyColors.myRed),
-    );
-  }
-
-  Widget _buildAppBarTitle() {
-    return const Text(
-      "All Agents",
-      style: TextStyle(color: MyColors.myWhite, fontSize: 20),
-    );
-  }
-
-  Widget _buildSearchField() {
-    return TextField(
-      controller: _textController,
-
-      onChanged: (searchedAgent) {
-        _getSearchedAgents(searchedAgent: searchedAgent);
-      },
-      decoration: const InputDecoration(
-        border: InputBorder.none,
-        hint: Text(
-          "Find an agent...",
-          style: TextStyle(color: MyColors.myWhite, fontSize: 20),
-        ),
-      ),
-      style: const TextStyle(color: MyColors.myWhite, fontSize: 20),
-    );
-  }
-
-  void _getSearchedAgents({required String searchedAgent}) {
-    _searchedAgents = allAgents
-        .where(
-          (agent) => agent.displayName!.toLowerCase().trim().contains(
-            searchedAgent.trim().toLowerCase(),
-          ),
-        )
-        .toList();
-
-    setState(() {});
-  }
-
-  List<Widget> _buildAppBarActions() {
-    if (!_isSearching) {
-      return [
-        IconButton(
-          onPressed: _startSearching,
-          icon: const Icon(Icons.search, color: MyColors.myWhite),
-        ),
-      ];
-    } else {
-      return [
-        IconButton(
-          onPressed: _clearSearch,
-          icon: const Icon(Icons.clear, color: MyColors.myWhite),
-        ),
-      ];
-    }
-  }
-
-  void _startSearching() {
-    ModalRoute.of(
-      context,
-    )!.addLocalHistoryEntry(LocalHistoryEntry(onRemove: _stopSearching));
-
-    setState(() {
-      _isSearching = true;
-    });
-  }
-
-  void _clearSearch() {
-    setState(() {
-      _textController.clear();
-      _searchedAgents.clear();
-    });
-  }
-
-  void _stopSearching() {
-    _clearSearch();
-
-    setState(() {
-      _isSearching = false;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const AppDrawer(),
       backgroundColor: MyColors.myGrey,
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: MyColors.myWhite),
 
-        title: _isSearching ? _buildSearchField() : _buildAppBarTitle(),
-        backgroundColor: const Color.fromARGB(255, 55, 5, 10),
-        actions: _buildAppBarActions(),
-      ),
+      appBar: const InteractiveAppBar(),
       body: buildBlocWidget(),
     );
   }
