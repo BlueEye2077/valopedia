@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:valopedia/business_logic/cubit/favourites_cubit/cubit/favourites_cubit.dart';
-import 'package:valopedia/constants/my_colors.dart';
-import 'package:valopedia/data/models/agent.dart';
-import 'package:valopedia/presentation/widgets/agents_gridview.dart';
-import 'package:valopedia/presentation/widgets/app_loading_indicator.dart';
-import 'package:valopedia/presentation/widgets/interactive_app_bar.dart';
+import '../../business_logic/cubit/favourites/favourites_cubit.dart';
+import '../../constants/my_colors.dart';
+import '../../data/models/agent.dart';
+import '../widgets/agents_gridview.dart';
+import '../widgets/app_loading_indicator.dart';
+import '../widgets/interactive_app_bar.dart';
 
 class FavouritesScreen extends StatefulWidget {
   const FavouritesScreen({super.key});
@@ -26,7 +26,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
         mainAxisSize: .min,
         children: [
           SvgPicture.asset(
-            "assets/images/favourites.svg",
+            "assets/images/svgs/favourites.svg",
             fit: .cover,
             height: 300,
           ),

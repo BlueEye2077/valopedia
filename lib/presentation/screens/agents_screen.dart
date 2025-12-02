@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:valopedia/business_logic/cubit/cubit/agents_cubit.dart';
-import 'package:valopedia/constants/my_colors.dart';
-import 'package:valopedia/data/models/agent.dart';
-import 'package:valopedia/presentation/widgets/agents_gridview.dart';
-import 'package:valopedia/presentation/widgets/app_drawer.dart';
-import 'package:valopedia/presentation/widgets/app_loading_indicator.dart';
-import 'package:valopedia/presentation/widgets/interactive_app_bar.dart';
+import 'package:flutter_offline/flutter_offline.dart';
+
+import '../../business_logic/cubit/agents/agents_cubit.dart';
+import '../../constants/my_colors.dart';
+import '../../data/models/agent.dart';
+import '../widgets/agents_gridview.dart';
+import '../widgets/app_drawer.dart';
+import '../widgets/app_loading_indicator.dart';
+import '../widgets/interactive_app_bar.dart';
+import '../widgets/no_internet_widget.dart';
 
 class AgentsScreen extends StatefulWidget {
   const AgentsScreen({super.key});
@@ -31,10 +34,9 @@ class _AgentScreenState extends State<AgentsScreen> {
         if (state is AgentsLoaded) {
           allAgents = (state).agents;
 
-          return 
-          allAgents.isNotEmpty?AgentsGridview(agents: searchedAgents):
-          AgentsGridview(agents: allAgents);
-          // return buildAgentsScreen();
+          return searchedAgents.isNotEmpty
+              ? AgentsGridview(agents: searchedAgents)
+              : AgentsGridview(agents: allAgents);
         } else {
           return const AppLoadingIndicator();
         }
@@ -64,7 +66,24 @@ class _AgentScreenState extends State<AgentsScreen> {
         title: "All Agents",
         onSearchChanged: _searchAgent,
       ),
-      body: buildBlocWidget(),
+      body: OfflineBuilder(
+        connectivityBuilder:
+            (
+              BuildContext context,
+              List<ConnectivityResult> connectivity,
+              Widget child,
+            ) {
+              final bool connected = !connectivity.contains(
+                ConnectivityResult.none,
+              );
+              if (connected) {
+                return buildBlocWidget();
+              } else {
+                return const NoInternetWidget();
+              }
+            },
+        child: const AppLoadingIndicator(),
+      ),
     );
   }
 }

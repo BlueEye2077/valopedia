@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:valopedia/app_router.dart';
-import 'package:valopedia/constants/theme.dart';
+import 'app_router.dart';
+import 'constants/theme.dart';
 
 void main() {
   runApp(ValopediaApp(appRouter: AppRouter()));
@@ -16,7 +16,7 @@ class ValopediaApp extends StatelessWidget {
     return MaterialApp(
       theme: kThemeData,
       title: 'Valopedia',
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,      
       onGenerateRoute: appRouter.generateRoute,
     );
   }

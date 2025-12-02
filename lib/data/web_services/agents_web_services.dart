@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:valopedia/constants/strings.dart';
+
+import '../../constants/strings.dart';
 
 class AgentWebServices {
   late Dio dio;
@@ -19,10 +20,8 @@ class AgentWebServices {
     try {
       Response response = await dio.get("agents");
       
-      print(response.data.toString());
       return response.data["data"];
     } catch (e) {
-      print(e.toString());
       return [];
     }
   }

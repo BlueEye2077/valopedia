@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:valopedia/constants/my_colors.dart';
-import 'package:valopedia/data/models/ability.dart';
+
+import '../../constants/my_colors.dart';
+import '../../data/models/ability.dart';
 
 class AbilityTile extends StatelessWidget {
   final Ability ability;

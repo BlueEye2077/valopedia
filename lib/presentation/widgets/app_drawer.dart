@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:valopedia/constants/my_colors.dart';
-import 'package:valopedia/constants/strings.dart';
+import '../../constants/my_colors.dart';
+import '../../constants/strings.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Drawer(
+    return Drawer(
       backgroundColor: MyColors.myGrey,
       child: Column(
         children: [
@@ -17,7 +17,9 @@ class AppDrawer extends StatelessWidget {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 fit: .cover,
-                image: AssetImage("assets/images/drawer_background.jpg"),
+                image: AssetImage(
+                  "assets/images/backgrounds/drawer_background.jpg",
+                ),
               ),
             ),
 

@@ -34,7 +34,6 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
-  flutter_launcher_icons: ^0.14.4
   flutter_native_splash: ^2.4.7
   flutter_offline: ^6.0.0
   flutter_svg: ^2.2.3
@@ -59,6 +58,8 @@ flutter:
   assets:
     # - assets/
     - assets/images/
+    - assets/images/svgs/
+    - assets/images/backgrounds/
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

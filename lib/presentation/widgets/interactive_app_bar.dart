@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:valopedia/constants/my_colors.dart';
+import '../../constants/my_colors.dart';
 
 class InteractiveAppBar extends StatefulWidget implements PreferredSizeWidget {
   final Function(String searchText) onSearchChanged;
@@ -25,7 +25,6 @@ class _InteractiveAppBarState extends State<InteractiveAppBar> {
   Widget _buildAppBarTitle() {
     return Text(
       widget.title,
-      // "All Agents",
       style: const TextStyle(color: MyColors.myWhite, fontSize: 20),
     );
   }
@@ -35,9 +34,7 @@ class _InteractiveAppBarState extends State<InteractiveAppBar> {
       controller: _textController,
 
       onChanged: (searchedAgent) {
-        // context.read<AgentsCubit>().getSearchedAgents(
-        //   searchedAgent: searchedAgent,
-        // );
+
         widget.onSearchChanged(searchedAgent);
       },
 

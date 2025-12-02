@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import 'package:valopedia/data/models/agent.dart';
-import 'package:valopedia/data/repository/agents_repository.dart';
+import '../../../data/models/agent.dart';
+import '../../../data/repository/agents_repository.dart';
 
 part 'agents_state.dart';
 
@@ -19,15 +19,4 @@ class AgentsCubit extends Cubit<AgentsState> {
       emit(AgentsLoaded(allAgents));
     });
   }
-
-  // void getSearchedAgents({required String searchedAgent}) {
-  //   final searchedAgents = allAgents
-  //       .where(
-  //         (agent) => agent.displayName!.toLowerCase().trim().contains(
-  //           searchedAgent.trim().toLowerCase(),
-  //         ),
-  //       )
-  //       .toList();
-  //   emit(AgentsLoaded(allAgents));
-  // }
 }

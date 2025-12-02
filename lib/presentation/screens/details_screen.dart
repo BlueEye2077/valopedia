@@ -2,12 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
-import 'package:valopedia/business_logic/cubit/favourites_cubit/cubit/favourites_cubit.dart';
-import 'package:valopedia/constants/my_colors.dart';
-import 'package:valopedia/data/models/agent.dart';
-import 'package:valopedia/presentation/widgets/ability_tile.dart';
-import 'package:valopedia/presentation/widgets/details_divider.dart';
-import 'package:valopedia/presentation/widgets/role_card.dart';
+
+import '../../business_logic/cubit/favourites/favourites_cubit.dart';
+import '../../constants/my_colors.dart';
+import '../../data/models/agent.dart';
+import '../widgets/ability_tile.dart';
+import '../widgets/details_divider.dart';
+import '../widgets/role_card.dart';
 
 class DetailsScreen extends StatefulWidget {
   final Agent agent;
@@ -28,7 +29,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
         FadeInImage(
           placeholder: MemoryImage(kTransparentImage),
           fit: BoxFit.cover,
-          image: const AssetImage("assets/images/background2.jpg"),
+          image: const AssetImage("assets/images/backgrounds/background2.jpg"),
         ),
         Hero(
           tag: widget.agent.uuid!,

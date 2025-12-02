@@ -1,5 +1,5 @@
-import 'package:valopedia/data/models/ability.dart';
-import 'package:valopedia/data/models/role.dart';
+import 'ability.dart';
+import 'role.dart';
 
 class Agent {
   String? uuid;

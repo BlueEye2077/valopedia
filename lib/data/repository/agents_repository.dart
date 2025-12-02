@@ -1,5 +1,5 @@
-import 'package:valopedia/data/models/agent.dart';
-import 'package:valopedia/data/web_services/agents_web_services.dart';
+import '../models/agent.dart';
+import '../web_services/agents_web_services.dart';
 
 class AgentsRepository {
   List<Agent> agents = [];

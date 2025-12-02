@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:valopedia/constants/my_colors.dart';
-import 'package:valopedia/data/models/agent.dart';
-import 'package:valopedia/presentation/widgets/details_divider.dart';
+import '../../constants/my_colors.dart';
+import '../../data/models/agent.dart';
+import 'details_divider.dart';
 
 class RoleCard extends StatelessWidget {
   final Agent agent;

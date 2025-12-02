@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:valopedia/constants/my_colors.dart';
-import 'package:valopedia/constants/my_fonts.dart';
-import 'package:valopedia/constants/strings.dart';
 
-import 'package:valopedia/data/models/agent.dart';
+import '../../constants/my_colors.dart';
+import '../../constants/my_fonts.dart';
+import '../../constants/strings.dart';
+import '../../data/models/agent.dart';
 
 class AgentItem extends StatelessWidget {
   final Agent agent;
@@ -84,7 +84,6 @@ class AgentItem extends StatelessWidget {
 
       child: Container(
         padding: const EdgeInsets.all(1),
-        // margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
         margin: const EdgeInsets.fromLTRB(8, 8, 8, 0),
         height: double.infinity,
         width: double.infinity,
