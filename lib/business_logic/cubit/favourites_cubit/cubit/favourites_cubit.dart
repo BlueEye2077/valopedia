@@ -10,17 +10,32 @@ class FavouritesCubit extends Cubit<FavouritesState> {
 
   FavouritesCubit() : super(FavouritesInitial());
 
+void isFavouritesEmpty(){
+  if (favouriteAgents.isEmpty){
+  emit(NoFavourites());
+}
+}
+
   void toggleFavorites(Agent agent) {
     if (favouriteAgents.contains(agent)) {
       favouriteAgents = favouriteAgents
           .where((element) => element != agent)
           .toList();
-      print("removed");
-      emit(FavouriesLoaded(favourites: favouriteAgents));
+      if (favouriteAgents.isEmpty) {
+        emit(NoFavourites());
+      } else {
+        emit(
+          FavouriesLoaded(
+              favourites: favouriteAgents),
+        );
+      }
     } else {
       favouriteAgents = [...favouriteAgents, agent];
-      print("added");
-      emit(FavouriesLoaded(favourites: favouriteAgents));
+      emit(
+        FavouriesLoaded(
+          favourites: favouriteAgents,
+        ),
+      );
     }
   }
 
@@ -31,4 +46,23 @@ class FavouritesCubit extends Cubit<FavouritesState> {
       return false;
     }
   }
+
+  // void getSearchedAgents({required String searchedAgent}) {
+  //   final searchedAgents = favouriteAgents
+  //       .where(
+  //         (agent) => agent.displayName!.toLowerCase().trim().contains(
+  //           searchedAgent.trim().toLowerCase(),
+  //         ),
+  //       )
+  //       .toList();
+  //   if (favouriteAgents.isEmpty) {
+  //     emit(NoFavourites());
+  //   } else {
+  //     emit(
+  //       FavouriesLoaded(
+  //         favourites: favouriteAgents,
+  //       ),
+  //     );
+  //   }
+  // }
 }

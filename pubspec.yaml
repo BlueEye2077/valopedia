@@ -37,6 +37,7 @@ dependencies:
   flutter_launcher_icons: ^0.14.4
   flutter_native_splash: ^2.4.7
   flutter_offline: ^6.0.0
+  flutter_svg: ^2.2.3
   google_fonts: ^6.3.2
   transparent_image: ^2.0.1
 

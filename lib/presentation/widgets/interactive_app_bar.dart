@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:valopedia/business_logic/cubit/cubit/agents_cubit.dart';
 import 'package:valopedia/constants/my_colors.dart';
-import 'package:valopedia/data/models/agent.dart';
 
 class InteractiveAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const InteractiveAppBar({super.key});
+  final Function(String searchText) onSearchChanged;
+  final String title;
+
+  const InteractiveAppBar({
+    super.key,
+    required this.title,
+    required this.onSearchChanged,
+  });
 
   @override
   State<InteractiveAppBar> createState() => _InteractiveAppBarState();
@@ -15,14 +19,14 @@ class InteractiveAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _InteractiveAppBarState extends State<InteractiveAppBar> {
-  List<Agent> _searchedAgents = [];
   bool _isSearching = false;
   final TextEditingController _textController = TextEditingController();
 
   Widget _buildAppBarTitle() {
-    return const Text(
-      "All Agents",
-      style: TextStyle(color: MyColors.myWhite, fontSize: 20),
+    return Text(
+      widget.title,
+      // "All Agents",
+      style: const TextStyle(color: MyColors.myWhite, fontSize: 20),
     );
   }
 
@@ -31,12 +35,12 @@ class _InteractiveAppBarState extends State<InteractiveAppBar> {
       controller: _textController,
 
       onChanged: (searchedAgent) {
-        context.read<AgentsCubit>().getSearchedAgents(
-          searchedAgent: searchedAgent,
-        );
-
-        // _getSearchedAgents(searchedAgent: searchedAgent);
+        // context.read<AgentsCubit>().getSearchedAgents(
+        //   searchedAgent: searchedAgent,
+        // );
+        widget.onSearchChanged(searchedAgent);
       },
+
       decoration: const InputDecoration(
         border: InputBorder.none,
         hint: Text(
@@ -47,18 +51,6 @@ class _InteractiveAppBarState extends State<InteractiveAppBar> {
       style: const TextStyle(color: MyColors.myWhite, fontSize: 20),
     );
   }
-  //todo...
-  // void _getSearchedAgents({required String searchedAgent}) {
-  //   _searchedAgents = widget.allAgents
-  //       .where(
-  //         (agent) => agent.displayName!.toLowerCase().trim().contains(
-  //           searchedAgent.trim().toLowerCase(),
-  //         ),
-  //       )
-  //       .toList();
-
-  //   setState(() {});
-  // }
 
   List<Widget> _buildAppBarActions() {
     if (!_isSearching) {
@@ -71,7 +63,7 @@ class _InteractiveAppBarState extends State<InteractiveAppBar> {
     } else {
       return [
         IconButton(
-          onPressed: _clearSearch,
+          onPressed: _stopSearching,
           icon: const Icon(Icons.clear, color: MyColors.myWhite),
         ),
       ];
@@ -91,9 +83,8 @@ class _InteractiveAppBarState extends State<InteractiveAppBar> {
   void _clearSearch() {
     setState(() {
       _textController.clear();
-      _searchedAgents.clear();
+      widget.onSearchChanged("");
     });
-    context.read<AgentsCubit>().getSearchedAgents(searchedAgent: '');
   }
 
   void _stopSearching() {

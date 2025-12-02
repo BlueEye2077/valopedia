@@ -11,26 +11,23 @@ class AgentsCubit extends Cubit<AgentsState> {
   List<Agent> allAgents = [];
   List<Agent> searchedAgents = [];
 
-
   AgentsCubit({required this.agentsRepository}) : super(AgentsInitial());
 
   void getAllAgents() {
     agentsRepository.getAllAgents().then((agents) {
       allAgents = agents;
-      emit(AgentsLoaded(allAgents, const []));
+      emit(AgentsLoaded(allAgents));
     });
   }
 
-//todo...
-  void getSearchedAgents({required String searchedAgent}) {
-    final searchedAgents = allAgents
-        .where(
-          (agent) => agent.displayName!
-              .toLowerCase()
-              .trim()
-              .contains(searchedAgent.trim().toLowerCase()),
-        )
-        .toList();
-    emit(AgentsLoaded(allAgents, searchedAgents));
-  }
+  // void getSearchedAgents({required String searchedAgent}) {
+  //   final searchedAgents = allAgents
+  //       .where(
+  //         (agent) => agent.displayName!.toLowerCase().trim().contains(
+  //           searchedAgent.trim().toLowerCase(),
+  //         ),
+  //       )
+  //       .toList();
+  //   emit(AgentsLoaded(allAgents));
+  // }
 }

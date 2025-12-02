@@ -7,6 +7,5 @@ final class AgentsInitial extends AgentsState {}
 
 class AgentsLoaded extends AgentsState {
   final List<Agent> agents;
-  final List<Agent> searchedAgents;
-  AgentsLoaded(this.agents, this.searchedAgents);
+  AgentsLoaded(this.agents);
 }
