@@ -14,6 +14,7 @@ class ValopediaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      
       theme: kThemeData,
       title: 'Valopedia',
       debugShowCheckedModeBanner: false,      

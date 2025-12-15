@@ -39,6 +39,7 @@ class AppDrawer extends StatelessWidget {
           const SizedBox(height: 12),
           ListTile(
             onTap: () {
+              Navigator.of(context).pop();
               Navigator.of(context).pushNamed(favouritesScreen);
             },
             leading: const Icon(Icons.favorite_sharp),

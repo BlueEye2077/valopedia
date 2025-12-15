@@ -21,22 +21,25 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
   
 
   Widget _buildNoFavouritesFoundWidget() {
-    return Center(
-      child: Column(
-        mainAxisSize: .min,
-        children: [
-          SvgPicture.asset(
-            "assets/images/svgs/favourites.svg",
-            fit: .cover,
-            height: 300,
-          ),
-          const SizedBox(height: 15),
-          const Text(
-            "No favourites found, Try adding some...",
-            textAlign: .center,
-            style: TextStyle(fontSize: 32, color: MyColors.myWhite),
-          ),
-        ],
+    return Padding(
+      padding: const .all(16),
+      child: Center(
+        child: Column(
+          mainAxisSize: .min,
+          children: [
+            SvgPicture.asset(
+              "assets/images/svgs/favourites.svg",
+              fit: .cover,
+              height: 300,
+            ),
+            const SizedBox(height: 15),
+            const Text(
+              "No favourites found, Try adding some...",
+              textAlign: .center,
+              style: TextStyle(fontSize: 32, color: MyColors.myWhite),
+            ),
+          ],
+        ),
       ),
     );
   }
