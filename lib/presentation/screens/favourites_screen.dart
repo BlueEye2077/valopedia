@@ -50,8 +50,8 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
         if (state is FavouriesLoaded) {
           favouritesAgents = state.favourites;
           return searchedAgents.isNotEmpty
-              ? AgentsGridview(agents: searchedAgents)
-              : AgentsGridview(agents: favouritesAgents);
+              ? AgentsGridview(items: searchedAgents)
+              : AgentsGridview(items: favouritesAgents);
         } else if (state is NoFavourites) {
           return _buildNoFavouritesFoundWidget();
         } else {

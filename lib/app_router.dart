@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:valopedia/business_logic/cubit/maps/maps_cubit.dart';
 import 'package:valopedia/business_logic/cubit/weapons/weapons_cubit.dart';
+import 'package:valopedia/data/models/weapon/weapon.dart';
 import 'package:valopedia/presentation/screens/root_screen.dart';
+import 'package:valopedia/presentation/screens/weapon_details_screen.dart';
 
 import 'business_logic/cubit/agents/agents_cubit.dart';
 import 'business_logic/cubit/favourites/favourites_cubit.dart';
@@ -10,7 +12,6 @@ import 'constants/strings.dart';
 import 'data/models/agent/agent.dart';
 import 'data/repository/agents_repository.dart';
 import 'data/web_services/agents_web_services.dart';
-import 'presentation/screens/agents_screen.dart';
 import 'presentation/screens/details_screen.dart';
 import 'presentation/screens/favourites_screen.dart';
 
@@ -68,6 +69,14 @@ class AppRouter {
             value: favouritesCubit,
             child: const FavouritesScreen(),
           ),
+        );
+
+      case weaponDatailsScreen:
+      final Weapon weapon = settings.arguments as Weapon ;
+      return MaterialPageRoute(
+          builder: (_) => 
+            WeaponDatailsScreen(weapon: weapon),
+          
         );
     }
     return null;

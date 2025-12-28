@@ -22,27 +22,29 @@ class DetailsScreen extends StatefulWidget {
 class _DetailsScreenState extends State<DetailsScreen> {
   // Image Stack
   Widget _buildFlexibleSpaceBarBackground() {
-    return Stack(
-      alignment: Alignment.center,
-      fit: StackFit.expand,
-      children: [
-        FadeInImage(
-          placeholder: MemoryImage(kTransparentImage),
-          fit: BoxFit.cover,
-          image: const AssetImage("assets/images/backgrounds/background2.jpg"),
-        ),
-        Hero(
-          tag: widget.agent.uuid!,
-
-          child: CachedNetworkImage(
-            imageUrl: widget.agent.fullPortrait!,
+    return Container(
+      child: Stack(
+        alignment: Alignment.center,
+        fit: StackFit.expand,
+        children: [
+          FadeInImage(
+            placeholder: MemoryImage(kTransparentImage),
             fit: BoxFit.cover,
-            placeholder: (context, url) =>
-                Image.asset("assets/images/jet.gif", fit: BoxFit.cover),
-            errorWidget: (context, url, error) => const Icon(Icons.error),
+            image: const AssetImage("assets/images/backgrounds/background2.jpg"),
           ),
-        ),
-      ],
+          Hero(
+            tag: widget.agent.uuid!,
+      
+            child: CachedNetworkImage(
+              imageUrl: widget.agent.fullPortrait!,
+              fit: BoxFit.cover,
+              placeholder: (context, url) =>
+                  Image.asset("assets/images/jet.gif", fit: BoxFit.cover),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

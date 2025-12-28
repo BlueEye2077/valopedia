@@ -38,20 +38,20 @@ class Weapon {
 }
 
 class WeaponStats {
-  int? fireRate;
-  int? magazineSize;
-  double? runSpeedMultiplier;
-  double? equipTimeSeconds;
-  int? reloadTimeSeconds;
-  double? firstBulletAccuracy;
-  int? shotgunPelletCount;
+  num? fireRate;
+  num? magazineSize;
+  num? runSpeedMultiplier;
+  num? equipTimeSeconds;
+  num? reloadTimeSeconds;
+  num? firstBulletAccuracy;
+  num? shotgunPelletCount;
   String? wallPenetration;
   String? feature;
-  Null? fireMode;
+  // Null? fireMode;
   String? altFireType;
   AdsStats? adsStats;
-  Null? altShotgunStats;
-  Null? airBurstStats;
+  // Null? altShotgunStats;
+  // Null? airBurstStats;
   List<DamageRanges>? damageRanges;
 
   WeaponStats.fromJson(Map<String, dynamic> json) {
@@ -64,13 +64,13 @@ class WeaponStats {
     shotgunPelletCount = json['shotgunPelletCount'];
     wallPenetration = json['wallPenetration'];
     feature = json['feature'];
-    fireMode = json['fireMode'];
+    // fireMode = json['fireMode'];
     altFireType = json['altFireType'];
     adsStats = json['adsStats'] != null
         ? AdsStats.fromJson(json['adsStats'])
         : null;
-    altShotgunStats = json['altShotgunStats'];
-    airBurstStats = json['airBurstStats'];
+    // altShotgunStats = json['altShotgunStats'];
+    // airBurstStats = json['airBurstStats'];
     if (json['damageRanges'] != null) {
       damageRanges = <DamageRanges>[];
       json['damageRanges'].forEach((v) {
@@ -81,11 +81,11 @@ class WeaponStats {
 }
 
 class AdsStats {
-  double? zoomMultiplier;
-  double? fireRate;
-  double? runSpeedMultiplier;
-  int? burstCount;
-  double? firstBulletAccuracy;
+  num? zoomMultiplier;
+  num? fireRate;
+  num? runSpeedMultiplier;
+  num? burstCount;
+  num? firstBulletAccuracy;
 
   AdsStats.fromJson(Map<String, dynamic> json) {
     zoomMultiplier = json['zoomMultiplier'];
@@ -97,11 +97,11 @@ class AdsStats {
 }
 
 class DamageRanges {
-  int? rangeStartMeters;
-  int? rangeEndMeters;
-  double? headDamage;
-  int? bodyDamage;
-  double? legDamage;
+  num? rangeStartMeters;
+  num? rangeEndMeters;
+  num? headDamage;
+  num? bodyDamage;
+  num? legDamage;
 
   DamageRanges.fromJson(Map<String, dynamic> json) {
     rangeStartMeters = json['rangeStartMeters'];
@@ -113,9 +113,9 @@ class DamageRanges {
 }
 
 class ShopData {
-  int? cost;
+  num? cost;
   String? category;
-  int? shopOrderPriority;
+  num? shopOrderPriority;
   String? categoryText;
   GridPosition? gridPosition;
   bool? canBeTrashed;
@@ -141,8 +141,8 @@ class ShopData {
 }
 
 class GridPosition {
-  int? row;
-  int? column;
+  num? row;
+  num? column;
 
   GridPosition.fromJson(Map<String, dynamic> json) {
     row = json['row'];

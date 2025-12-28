@@ -38,13 +38,19 @@ class _AgentScreenState extends State<AgentsScreen>
         if (state is AgentsLoaded) {
           allAgents = (state).agents;
 
-          return searchedAgents.isNotEmpty
-              ? AgentsGridview(agents: searchedAgents)
-              : AgentsGridview(agents: allAgents);
+          return _buildAgentGridView();
         } else {
           return const AppLoadingIndicator();
         }
       },
+    );
+  }
+
+  Widget _buildAgentGridView() {
+    return SingleChildScrollView(
+      child: searchedAgents.isNotEmpty
+          ? AgentsGridview(items: searchedAgents, gridType: .agent)
+          : AgentsGridview(items: allAgents, gridType: .agent),
     );
   }
 
@@ -64,9 +70,8 @@ class _AgentScreenState extends State<AgentsScreen>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      drawer: const AppDrawer(),
       backgroundColor: MyColors.myGrey,
-
+      drawer: const AppDrawer(),
       appBar: InteractiveAppBar(
         title: "All Agents",
         onSearchChanged: _searchAgent,

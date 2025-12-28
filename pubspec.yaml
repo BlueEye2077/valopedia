@@ -30,6 +30,7 @@ environment:
 dependencies:
   cached_network_image: ^3.4.1
   cupertino_icons: ^1.0.8
+  curved_navigation_bar: ^1.0.6
   dio: ^5.9.0
   flutter:
     sdk: flutter
@@ -37,6 +38,7 @@ dependencies:
   flutter_native_splash: ^2.4.7
   flutter_offline: ^6.0.0
   flutter_svg: ^2.2.3
+  font_awesome_flutter: ^10.12.0
   google_fonts: ^6.3.2
   transparent_image: ^2.0.1
 
