@@ -25,4 +25,25 @@ class AgentWebServices {
       return [];
     }
   }
+
+
+  Future<List<dynamic>>getAllMaps() async {
+    try {
+      Response response = await dio.get("maps");
+      return response.data["data"];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  Future<List<dynamic>>getAllWeapons() async {
+    try {
+      Response response = await dio.get("weapons");
+      
+      return response.data["data"];
+    } catch (e) {
+      return [];
+    }
+  }
+
 }

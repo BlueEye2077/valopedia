@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../business_logic/cubit/favourites/favourites_cubit.dart';
 import '../../constants/my_colors.dart';
-import '../../data/models/agent.dart';
+import '../../data/models/agent/agent.dart';
 import '../widgets/agents_gridview.dart';
 import '../widgets/app_loading_indicator.dart';
 import '../widgets/interactive_app_bar.dart';

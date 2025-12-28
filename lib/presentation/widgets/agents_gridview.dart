@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../constants/my_colors.dart';
-import '../../data/models/agent.dart';
+import '../../data/models/agent/agent.dart';
 import 'agent_item.dart';
 
 class AgentsGridview extends StatelessWidget {
@@ -16,8 +16,8 @@ class AgentsGridview extends StatelessWidget {
         physics: const ClampingScrollPhysics(),
         addAutomaticKeepAlives: true,
         addRepaintBoundaries: true,
-        shrinkWrap: true,
-
+        // shrinkWrap: true,
+        cacheExtent: 2000,
         itemCount: agents.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,

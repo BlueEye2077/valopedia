@@ -7,5 +7,5 @@ class MyColors {
   static const myLightRed = Color(0xFFFF4656);
   static const myWhite = Color(0xFFFFFFFF);
   static const mySilver = Color(0xFFB2B4BC);
-
+  static const myDarkRed = Color.fromARGB(255, 55, 5, 10);
 }

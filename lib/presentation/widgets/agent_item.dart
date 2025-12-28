@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../constants/my_colors.dart';
 import '../../constants/my_fonts.dart';
 import '../../constants/strings.dart';
-import '../../data/models/agent.dart';
+import '../../data/models/agent/agent.dart';
 
 class AgentItem extends StatelessWidget {
   final Agent agent;

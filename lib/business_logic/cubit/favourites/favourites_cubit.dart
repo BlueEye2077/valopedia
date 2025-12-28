@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import '../../../data/models/agent.dart';
+import '../../../data/models/agent/agent.dart';
 
 part 'favourites_state.dart';
 

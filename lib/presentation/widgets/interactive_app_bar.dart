@@ -98,7 +98,7 @@ class _InteractiveAppBarState extends State<InteractiveAppBar> {
       iconTheme: const IconThemeData(color: MyColors.myWhite),
 
       title: _isSearching ? _buildSearchField() : _buildAppBarTitle(),
-      backgroundColor: const Color.fromARGB(255, 55, 5, 10),
+      backgroundColor: MyColors.myDarkRed,
       actions: _buildAppBarActions(),
     );
   }

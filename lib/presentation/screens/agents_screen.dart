@@ -4,7 +4,7 @@ import 'package:flutter_offline/flutter_offline.dart';
 
 import '../../business_logic/cubit/agents/agents_cubit.dart';
 import '../../constants/my_colors.dart';
-import '../../data/models/agent.dart';
+import '../../data/models/agent/agent.dart';
 import '../widgets/agents_gridview.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/app_loading_indicator.dart';
@@ -18,9 +18,13 @@ class AgentsScreen extends StatefulWidget {
   State<AgentsScreen> createState() => _AgentScreenState();
 }
 
-class _AgentScreenState extends State<AgentsScreen> {
+class _AgentScreenState extends State<AgentsScreen>
+    with AutomaticKeepAliveClientMixin {
   late List<Agent> allAgents;
   List<Agent> searchedAgents = [];
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -58,6 +62,7 @@ class _AgentScreenState extends State<AgentsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       drawer: const AppDrawer(),
       backgroundColor: MyColors.myGrey,

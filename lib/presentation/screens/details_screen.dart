@@ -5,7 +5,7 @@ import 'package:transparent_image/transparent_image.dart';
 
 import '../../business_logic/cubit/favourites/favourites_cubit.dart';
 import '../../constants/my_colors.dart';
-import '../../data/models/agent.dart';
+import '../../data/models/agent/agent.dart';
 import '../widgets/ability_tile.dart';
 import '../widgets/details_divider.dart';
 import '../widgets/role_card.dart';
