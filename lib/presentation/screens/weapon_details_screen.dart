@@ -18,29 +18,32 @@ class WeaponDatailsScreen extends StatelessWidget {
   Widget _flexibleSpaceBarBackground() {
     return Hero(
       tag: weapon.uuid!,
-      child: Container(
-        child: Stack(
-          alignment: .center,
-          children: [
-            Image.asset(
-              "assets/images/backgrounds/background1.jpg",
-              fit: .cover,
-              height: .infinity,
-              width: .infinity,
-            ),
-      
-            Padding(
-              padding: const .all(12),
-      
-              child: FadeInImage.memoryNetwork(
-                // width: double.infinity,
-                // height: double.infinity,
-                placeholder: kTransparentImage,
-                image: weapon.displayIcon!,
-                fit: BoxFit.cover,
+      child: Material(
+        type: MaterialType.transparency,
+        child: Container(
+          child: Stack(
+            alignment: .center,
+            children: [
+              Image.asset(
+                "assets/images/backgrounds/background1.jpg",
+                fit: .cover,
+                height: .infinity,
+                width: .infinity,
               ),
-            ),
-          ],
+
+              Padding(
+                padding: const .all(12),
+
+                child: FadeInImage.memoryNetwork(
+                  // width: double.infinity,
+                  // height: double.infinity,
+                  placeholder: kTransparentImage,
+                  image: weapon.displayIcon!,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

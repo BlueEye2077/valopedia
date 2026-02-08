@@ -34,7 +34,8 @@ class _WeaponsScreenState extends State<WeaponsScreen>
       builder: (context, state) {
         if (state is WeaponsLoaded) {
           allWeapons = (state).weapons;
-          return searchedWeapons.isNotEmpty
+          return 
+           searchedWeapons.isNotEmpty
               ? WeaponsListView(weapons: searchedWeapons)
               : WeaponsListView(weapons: allWeapons);
         } else {
