@@ -4,10 +4,13 @@ import '../../constants/my_colors.dart';
 class InteractiveAppBar extends StatefulWidget implements PreferredSizeWidget {
   final Function(String searchText) onSearchChanged;
   final String title;
+  final String hint;
 
   const InteractiveAppBar({
     super.key,
     required this.title,
+    required this.hint,
+
     required this.onSearchChanged,
   });
 
@@ -22,6 +25,7 @@ class _InteractiveAppBarState extends State<InteractiveAppBar> {
   bool _isSearching = false;
   final TextEditingController _textController = TextEditingController();
 
+  // build the main title
   Widget _buildAppBarTitle() {
     return Text(
       widget.title,
@@ -29,26 +33,28 @@ class _InteractiveAppBarState extends State<InteractiveAppBar> {
     );
   }
 
+  // build the search field
   Widget _buildSearchField() {
     return TextField(
       controller: _textController,
 
+      // send the searched name to 'generic_favourites_screen'
       onChanged: (searchedAgent) {
-
         widget.onSearchChanged(searchedAgent);
       },
 
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         border: InputBorder.none,
         hint: Text(
-          "Find an agent...",
-          style: TextStyle(color: MyColors.myWhite, fontSize: 20),
+          widget.hint,
+          style: const TextStyle(color: MyColors.myWhite, fontSize: 20),
         ),
       ),
       style: const TextStyle(color: MyColors.myWhite, fontSize: 20),
     );
   }
 
+  // build the app bar actions
   List<Widget> _buildAppBarActions() {
     if (!_isSearching) {
       return [
@@ -68,9 +74,10 @@ class _InteractiveAppBarState extends State<InteractiveAppBar> {
   }
 
   void _startSearching() {
+    // creats another layer on top of the app bar
     ModalRoute.of(
       context,
-    )!.addLocalHistoryEntry(LocalHistoryEntry(onRemove: _stopSearching));
+    )!.addLocalHistoryEntry(LocalHistoryEntry(onRemove:_stopSearching,));
 
     setState(() {
       _isSearching = true;
@@ -90,6 +97,12 @@ class _InteractiveAppBarState extends State<InteractiveAppBar> {
     setState(() {
       _isSearching = false;
     });
+  }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
   }
 
   @override

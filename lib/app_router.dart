@@ -2,41 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:valopedia/business_logic/cubit/maps/maps_cubit.dart';
 import 'package:valopedia/business_logic/cubit/weapons/weapons_cubit.dart';
+import 'package:valopedia/data/models/map/valorant_map.dart';
 import 'package:valopedia/data/models/weapon/weapon.dart';
+import 'package:valopedia/presentation/screens/agents_screen.dart';
+import 'package:valopedia/presentation/screens/favourite_agents_screen.dart';
+import 'package:valopedia/presentation/screens/favourite_maps_screen.dart';
+import 'package:valopedia/presentation/screens/favourite_weapons_screen.dart';
 import 'package:valopedia/presentation/screens/root_screen.dart';
+import 'package:valopedia/presentation/screens/valorant_map_details_screen.dart';
 import 'package:valopedia/presentation/screens/weapon_details_screen.dart';
 
 import 'business_logic/cubit/agents/agents_cubit.dart';
 import 'business_logic/cubit/favourites/favourites_cubit.dart';
 import 'constants/strings.dart';
 import 'data/models/agent/agent.dart';
-import 'data/repository/agents_repository.dart';
-import 'data/web_services/agents_web_services.dart';
-import 'presentation/screens/details_screen.dart';
-import 'presentation/screens/favourites_screen.dart';
+import 'data/repository/repository.dart';
+import 'data/web_services/web_services.dart';
+import 'presentation/screens/agent_details_screen.dart';
 
 class AppRouter {
-  late AgentsRepository agentsRepository;
+  late Repository agentsRepository;
   late AgentsCubit agentsCubit;
   late MapsCubit mapsCubit;
   late WeaponsCubit weaponsCubit;
-  late FavouritesCubit favouritesCubit;
+  late FavouritesCubit<Agent> favouriteAgentsCubit;
+  late FavouritesCubit<ValorantMap> favouriteMapsCubit;
+  late FavouritesCubit<Weapon> favouriteWeaponsCubit;
 
   AppRouter() {
-    agentsRepository = AgentsRepository(agentWebServices: AgentWebServices());
+    agentsRepository = Repository(agentWebServices: WebServices());
     agentsCubit = AgentsCubit(agentsRepository: agentsRepository);
     mapsCubit = MapsCubit(agentsRepository: agentsRepository);
     weaponsCubit = WeaponsCubit(agentsRepository: agentsRepository);
 
-    favouritesCubit = FavouritesCubit();
+    favouriteAgentsCubit = FavouritesCubit<Agent>();
+    favouriteMapsCubit = FavouritesCubit<ValorantMap>();
+    favouriteWeaponsCubit = FavouritesCubit<Weapon>();
   }
 
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       // case splashScreen:
-      //   return MaterialPageRoute(builder: (_) => const SplashScreen());
+        // return MaterialPageRoute(builder: (_) => const SplashScreen());
 
-      case agentsScreen:
+      case rootScreen:
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
@@ -55,30 +64,57 @@ class AppRouter {
       //     ),
       //   );
 
-      case detailsScreen:
+      case agentDetailsScreen:
         final Agent agent = settings.arguments as Agent;
         return MaterialPageRoute(
           builder: (_) => BlocProvider.value(
-            value: favouritesCubit,
-            child: DetailsScreen(agent: agent),
-          ),
-        );
-      case favouritesScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider.value(
-            value: favouritesCubit,
-            child: const FavouritesScreen(),
+            value: favouriteAgentsCubit,
+            child: AgentDetailsScreen(agent: agent),
           ),
         );
 
       case weaponDatailsScreen:
-      final Weapon weapon = settings.arguments as Weapon ;
-      return MaterialPageRoute(
-          builder: (_) => 
-            WeaponDatailsScreen(weapon: weapon),
-          
+        final Weapon weapon = settings.arguments as Weapon;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: favouriteWeaponsCubit,
+            child: WeaponDatailsScreen(weapon: weapon),
+          ),
+        );
+
+      case mapsDatailsScreen:
+        final ValorantMap valorantMap = settings.arguments as ValorantMap;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: favouriteMapsCubit,
+            child: ValorantMapDetailsScreen(valorantMap: valorantMap),
+          ),
+        );
+
+      case favouriteAgenetsScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: favouriteAgentsCubit,
+            child: const FavouriteAgentsScreen(),
+          ),
+        );
+
+      case favouriteMapsScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: favouriteMapsCubit,
+            child: const FavouriteMapsScreen(),
+          ),
+        );
+      case favouriteWeaponsScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: favouriteWeaponsCubit,
+            child: const FavouriteWeaponsScreen(),
+          ),
         );
     }
+
     return null;
   }
 }

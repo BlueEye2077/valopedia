@@ -11,7 +11,17 @@ class AbilityTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Image.network(ability.displayIcon!, alignment: .topCenter),
+      leading: ability.displayIcon != null
+          ? Image.network(
+              ability.displayIcon!,
+              alignment: .topCenter,
+              fit: .cover,
+            )
+          : Image.asset(
+              "assets/images/backgrounds/white_valorant_logo.png",
+              alignment: .topCenter,
+              fit: .cover,
+            ),
       title: Text(ability.displayName!),
       subtitle: Text(ability.description!),
       titleTextStyle: const TextStyle(
@@ -22,8 +32,7 @@ class AbilityTile extends StatelessWidget {
       subtitleTextStyle: const TextStyle(
         color: MyColors.mySilver,
         fontWeight: .bold,
-        fontSize: 13
-        ,
+        fontSize: 13,
       ),
     );
   }

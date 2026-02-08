@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:valopedia/constants/strings.dart';
 import 'package:valopedia/data/models/agent/agent.dart';
 import 'agent_item.dart';
 
 class AgentsGridview extends StatelessWidget {
   final List<Agent> items;
-  final ScreensName? gridType;
-  const AgentsGridview({
-    super.key,
-     this.gridType,
-    required this.items,
-  });
+  const AgentsGridview({super.key, required this.items});
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
       physics: const ClampingScrollPhysics(),
-      addAutomaticKeepAlives: true,
-      addRepaintBoundaries: true,
+      // addAutomaticKeepAlives: true,
+      // addRepaintBoundaries: true,
       shrinkWrap: true,
-      cacheExtent: 2000,
+      // cacheExtent: 2000,
       itemCount: items.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,

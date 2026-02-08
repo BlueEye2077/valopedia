@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:valopedia/presentation/widgets/custom_sliver_app_bar.dart';
+import 'package:valopedia/presentation/widgets/section_title.dart';
 
 import '../../business_logic/cubit/favourites/favourites_cubit.dart';
 import '../../constants/my_colors.dart';
@@ -10,16 +12,16 @@ import '../widgets/ability_tile.dart';
 import '../widgets/details_divider.dart';
 import '../widgets/role_card.dart';
 
-class DetailsScreen extends StatefulWidget {
+class AgentDetailsScreen extends StatefulWidget {
   final Agent agent;
 
-  const DetailsScreen({super.key, required this.agent});
+  const AgentDetailsScreen({super.key, required this.agent});
 
   @override
-  State<DetailsScreen> createState() => _DetailsScreenState();
+  State<AgentDetailsScreen> createState() => _AgentDetailsScreenState();
 }
 
-class _DetailsScreenState extends State<DetailsScreen> {
+class _AgentDetailsScreenState extends State<AgentDetailsScreen> {
   // Image Stack
   Widget _buildFlexibleSpaceBarBackground() {
     return Container(
@@ -30,11 +32,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
           FadeInImage(
             placeholder: MemoryImage(kTransparentImage),
             fit: BoxFit.cover,
-            image: const AssetImage("assets/images/backgrounds/background2.jpg"),
+            image: const AssetImage(
+              "assets/images/backgrounds/background2.jpg",
+            ),
           ),
           Hero(
             tag: widget.agent.uuid!,
-      
+
             child: CachedNetworkImage(
               imageUrl: widget.agent.fullPortrait!,
               fit: BoxFit.cover,
@@ -48,65 +52,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  // App Bar
-  Widget _buildSliverAppBar() {
-    bool isFav = BlocProvider.of<FavouritesCubit>(
-      context,
-    ).isFavourite(widget.agent);
-    // bool isFav =
-    return SliverAppBar(
-      actions: [
-        IconButton(
-          onPressed: () {
-            BlocProvider.of<FavouritesCubit>(
-              context,
-            ).toggleFavorites(widget.agent);
-            
-          },
-          icon: isFav
-              ? const Icon(Icons.favorite_sharp)
-              : const Icon(Icons.favorite_outline_sharp),
-        ),
-      ],
-      iconTheme: const IconThemeData(color: MyColors.myWhite),
-      expandedHeight: 600,
-      pinned: true,
-      stretch: true,
-      backgroundColor: MyColors.myLightGrey,
-      centerTitle: true,
-      flexibleSpace: FlexibleSpaceBar(
-        background: _buildFlexibleSpaceBarBackground(),
-        title: Text(
-          widget.agent.displayName!,
-          style: const TextStyle(letterSpacing: 12, color: MyColors.myWhite),
-          softWrap: true,
-          overflow: .ellipsis,
-        ),
-        centerTitle: true,
-      ),
-    );
-  }
-
-  Widget _buildSectionTitle(String title) {
-    return Text(
-      textAlign: .start,
-      // "BIOGRAPHY",
-      title.toUpperCase(),
-      style: const TextStyle(
-        color: MyColors.myRed,
-        fontSize: 24,
-        fontWeight: .bold,
-      ),
-    );
-  }
-
   Widget _buildSectionWithDescription(String title, String description) {
     return Container(
       margin: const .all(12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildSectionTitle(title),
+          SectionTitle(title: title),
           const SizedBox(height: 8),
           Text(
             description,
@@ -123,7 +75,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
       child: Column(
         crossAxisAlignment: .start,
         children: [
-          _buildSectionTitle("Abilities"),
+          const SectionTitle(title: "Abilities"),
           ...widget.agent.abilities.map(
             (ability) => AbilityTile(ability: ability),
           ),
@@ -166,18 +118,22 @@ class _DetailsScreenState extends State<DetailsScreen> {
   }
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.myGrey,
-      body: BlocBuilder<FavouritesCubit, FavouritesState>(
+      body: BlocBuilder<FavouritesCubit<Agent>, FavouritesState>(
         builder: (context, state) {
           return CustomScrollView(
-            slivers: [_buildSliverAppBar(), _buildSliverBody()],
+            slivers: [
+              CustomSliverAppBar(
+                item: widget.agent,
+                flexibleSpaceBarBackground: _buildFlexibleSpaceBarBackground,
+                expandedHeight: 600,
+                title: widget.agent.displayName!,
+              ),
+
+              _buildSliverBody(),
+            ],
           );
         },
       ),

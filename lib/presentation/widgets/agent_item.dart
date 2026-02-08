@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:valopedia/presentation/screens/splash_screen.dart';
 
 import '../../constants/my_colors.dart';
 import '../../constants/my_fonts.dart';
@@ -80,8 +81,9 @@ class AgentItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () =>
-          Navigator.pushNamed(context, detailsScreen, arguments: agent),
+          Navigator.pushNamed(context, agentDetailsScreen, arguments: agent),
 
+     
       child: Container(
         padding: const EdgeInsets.all(1),
         margin: const EdgeInsets.fromLTRB(8, 8, 8, 0),

@@ -1,39 +1,39 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import '../../../data/models/agent/agent.dart';
 
 part 'favourites_state.dart';
 
-class FavouritesCubit extends Cubit<FavouritesState> {
-  List<Agent> favouriteAgents = [];
+class FavouritesCubit<T> extends Cubit<FavouritesState<T>> {
+  List<T> favourites = [];
 
   FavouritesCubit() : super(FavouritesInitial());
 
   void isFavouritesEmpty() {
-    if (favouriteAgents.isEmpty) {
+    if (favourites.isEmpty) {
       emit(NoFavourites());
     }
   }
 
-  void toggleFavorites(Agent agent) {
-    if (favouriteAgents.contains(agent)) {
-      favouriteAgents = favouriteAgents
-          .where((element) => element != agent)
-          .toList();
-      if (favouriteAgents.isEmpty) {
+  void toggleFavourites(T item) {
+    if (favourites.contains(item)) {
+      favourites = favourites.where((element) => element != item).toList();
+      if (favourites.isEmpty) {
         emit(NoFavourites());
       } else {
-        emit(FavouriesLoaded(favourites: favouriteAgents));
+        emit(FavouritesLoaded(favourites: favourites));
       }
     } else {
-      favouriteAgents = [...favouriteAgents, agent];
-      emit(FavouriesLoaded(favourites: favouriteAgents));
+      favourites = [...favourites, item];
+      print(("is added"));
+      print((favourites));
+      emit(FavouritesLoaded(favourites: favourites));
+      
     }
   }
 
-  bool isFavourite(Agent agent) {
-    if (favouriteAgents.contains(agent)) {
+  bool isFavourite(T item) {
+    if (favourites.contains(item)) {
       return true;
     } else {
       return false;

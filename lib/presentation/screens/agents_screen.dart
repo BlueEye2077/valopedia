@@ -38,6 +38,7 @@ class _AgentScreenState extends State<AgentsScreen>
         if (state is AgentsLoaded) {
           allAgents = (state).agents;
 
+          print("this is bad i think");
           return _buildAgentGridView();
         } else {
           return const AppLoadingIndicator();
@@ -48,9 +49,15 @@ class _AgentScreenState extends State<AgentsScreen>
 
   Widget _buildAgentGridView() {
     return SingleChildScrollView(
-      child: searchedAgents.isNotEmpty
-          ? AgentsGridview(items: searchedAgents, gridType: .agent)
-          : AgentsGridview(items: allAgents, gridType: .agent),
+      child: Container(
+        child: Column(
+          children: [
+            AgentsGridview(
+              items: searchedAgents.isNotEmpty ? searchedAgents : allAgents,
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -69,13 +76,17 @@ class _AgentScreenState extends State<AgentsScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
     return Scaffold(
-      backgroundColor: MyColors.myGrey,
       drawer: const AppDrawer(),
+
       appBar: InteractiveAppBar(
+        hint: "Find an agent...",
         title: "All Agents",
         onSearchChanged: _searchAgent,
       ),
+
+      backgroundColor: MyColors.myGrey,
       body: OfflineBuilder(
         connectivityBuilder:
             (

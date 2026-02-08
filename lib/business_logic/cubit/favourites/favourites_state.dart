@@ -1,15 +1,14 @@
 part of 'favourites_cubit.dart';
 
 @immutable
-sealed class FavouritesState {}
+sealed class FavouritesState<T> {}
 
-final class FavouritesInitial extends FavouritesState {}
+final class FavouritesInitial<T> extends FavouritesState<T> {}
 
+class NoFavourites<T> extends FavouritesState<T> {}
 
-class NoFavourites extends FavouritesState{}
+class FavouritesLoaded<T> extends FavouritesState<T> {
+  final List<T> favourites;
 
-class FavouriesLoaded extends FavouritesState {
-  final List<Agent> favourites;
-
-  FavouriesLoaded({required this.favourites});
+  FavouritesLoaded({required this.favourites});
 }

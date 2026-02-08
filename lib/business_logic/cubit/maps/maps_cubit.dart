@@ -1,12 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:valopedia/data/models/map/map.dart';
-import 'package:valopedia/data/repository/agents_repository.dart';
+import 'package:valopedia/data/models/map/valorant_map.dart';
+import 'package:valopedia/data/repository/repository.dart';
 
 part 'maps_state.dart';
 
 class MapsCubit extends Cubit<MapsState> {
-  AgentsRepository agentsRepository;
+  Repository agentsRepository;
   List<ValorantMap> allMaps = [];
 
   MapsCubit({required this.agentsRepository}) : super(MapsInitial());

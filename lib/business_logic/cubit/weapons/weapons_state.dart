@@ -6,7 +6,6 @@ sealed class WeaponsState {}
 final class WeaponsInitial extends WeaponsState {}
 
 final class WeaponsLoaded extends WeaponsState {
-
   final List<Weapon> weapons;
   WeaponsLoaded(this.weapons);
 }

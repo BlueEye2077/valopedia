@@ -1,7 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:fluttericon/rpg_awesome_icons.dart';
 import 'package:valopedia/constants/my_colors.dart';
 import 'package:valopedia/presentation/screens/agents_screen.dart';
 import 'package:valopedia/presentation/screens/maps_screen.dart';
@@ -16,7 +17,7 @@ class RootScreen extends StatefulWidget {
 }
 
 class _RootScreenState extends State<RootScreen> {
-  final PageController _pageController = PageController(initialPage: 1,);
+  final PageController _pageController = PageController(initialPage: 1);
   int _currentIndex = 1;
   late List<Widget> _appScreens;
 
@@ -40,38 +41,26 @@ class _RootScreenState extends State<RootScreen> {
     return CurvedNavigationBar(
       backgroundColor: Colors.transparent,
       color: MyColors.myDarkRed,
-      index:_currentIndex ,
+      index: _currentIndex,
 
-      // currentIndex: _currentIndex,
       onTap: (index) => setState(() {
         _pageController.jumpToPage(index);
       }),
       items: const <Widget>[
-             
-            Icon(CupertinoIcons.map_fill, size: 32,color: MyColors.myWhite,),
-            Icon(CupertinoIcons.person_2_square_stack_fill, size: 32,color: MyColors.myWhite),
-            Icon(CupertinoIcons.ant, size: 32,color: MyColors.myWhite),
-          ],
-      // items: const [
-      //   BottomNavigationBarItem(icon: Icon(Icons.gavel), label: "Weapons"),
-      //   BottomNavigationBarItem(
-      //     icon: Icon(Icons.co_present_rounded),
-      //     label: "Agents",
-      //   ),
-      //   BottomNavigationBarItem(icon: Icon(Icons.map_sharp), label: "Maps"),
-      // ],
+        Icon(RpgAwesome.crossed_pistols, size: 32, color: MyColors.myWhite),
+        Icon(RpgAwesome.double_team, size: 32, color: MyColors.myWhite),
+        Icon(FontAwesome5.map, size: 32, color: MyColors.myWhite),
+      ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       extendBody: true,
-      drawer: const AppDrawer(),
+      drawer: AppDrawer(),
 
       body: PageView(
-        
         controller: _pageController,
         children: _appScreens,
         onPageChanged: (index) => setState(() {

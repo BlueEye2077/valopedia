@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 
 import '../../constants/strings.dart';
 
-class AgentWebServices {
+class WebServices {
   late Dio dio;
 
-  AgentWebServices() {
+  WebServices() {
     BaseOptions baseOpttions = BaseOptions(
       baseUrl: baseUrl,
       receiveDataWhenStatusError: true,
@@ -16,34 +16,36 @@ class AgentWebServices {
     dio = Dio(baseOpttions);
   }
 
-  Future<List<dynamic>>getAllAgents() async {
+  // The function to get all the agents
+  Future<List<dynamic>> getAllAgents() async {
     try {
       Response response = await dio.get("agents");
-      
+      print("agent api sent");
       return response.data["data"];
     } catch (e) {
       return [];
     }
   }
 
-
-  Future<List<dynamic>>getAllMaps() async {
+  // The function to get all the maps
+  Future<List<dynamic>> getAllMaps() async {
     try {
       Response response = await dio.get("maps");
+      print("maps api sent");
       return response.data["data"];
     } catch (e) {
       return [];
     }
   }
 
-  Future<List<dynamic>>getAllWeapons() async {
+  // The function to get all the weapons
+  Future<List<dynamic>> getAllWeapons() async {
     try {
       Response response = await dio.get("weapons");
-      
+      print("weapons api sent");
       return response.data["data"];
     } catch (e) {
       return [];
     }
   }
-
 }

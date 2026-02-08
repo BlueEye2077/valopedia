@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
       const Duration(seconds: 2),
-      () => Navigator.pushReplacementNamed(context, agentsScreen),
+      () => Navigator.pushReplacementNamed(context, rootScreen),
     );
   }
 

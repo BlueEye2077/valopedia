@@ -47,11 +47,8 @@ class WeaponStats {
   num? shotgunPelletCount;
   String? wallPenetration;
   String? feature;
-  // Null? fireMode;
   String? altFireType;
   AdsStats? adsStats;
-  // Null? altShotgunStats;
-  // Null? airBurstStats;
   List<DamageRanges>? damageRanges;
 
   WeaponStats.fromJson(Map<String, dynamic> json) {
@@ -119,9 +116,7 @@ class ShopData {
   String? categoryText;
   GridPosition? gridPosition;
   bool? canBeTrashed;
-  Null? image;
   String? newImage;
-  Null? newImage2;
   String? assetPath;
 
   ShopData.fromJson(Map<String, dynamic> json) {
@@ -133,9 +128,7 @@ class ShopData {
         ? GridPosition.fromJson(json['gridPosition'])
         : null;
     canBeTrashed = json['canBeTrashed'];
-    image = json['image'];
     newImage = json['newImage'];
-    newImage2 = json['newImage2'];
     assetPath = json['assetPath'];
   }
 }
