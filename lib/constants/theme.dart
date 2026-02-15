@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:valopedia/constants/my_colors.dart';
+import 'my_colors.dart';
 
 ThemeData kThemeData = ThemeData().copyWith(
   brightness: .dark,

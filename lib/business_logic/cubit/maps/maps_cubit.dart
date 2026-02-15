@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:valopedia/data/models/map/valorant_map.dart';
-import 'package:valopedia/data/repository/repository.dart';
+import '../../../data/models/map/valorant_map.dart';
+import '../../../data/repository/repository.dart';
 
 part 'maps_state.dart';
 

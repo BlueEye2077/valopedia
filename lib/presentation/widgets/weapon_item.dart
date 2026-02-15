@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:transparent_image/transparent_image.dart';
-import 'package:valopedia/constants/my_colors.dart';
-import 'package:valopedia/constants/strings.dart';
-import 'package:valopedia/data/models/weapon/weapon.dart';
+
+import '../../constants/my_colors.dart';
+import '../../constants/strings.dart';
+import '../../data/models/weapon/weapon.dart';
 
 class WeaponItem extends StatelessWidget {
   final Weapon weapon;
@@ -14,14 +14,11 @@ class WeaponItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () =>
-          // Navigator.of(
-          // context,
-          // ).push(MaterialPageRoute(builder: (context) => SplashScreen())),
           Navigator.pushNamed(context, weaponDatailsScreen, arguments: weapon),
       child: Hero(
         tag: weapon.uuid!,
         child: Material(
-              type: MaterialType.transparency,
+          type: MaterialType.transparency,
           child: Container(
             width: .infinity,
             height: 300,
@@ -32,7 +29,7 @@ class WeaponItem extends StatelessWidget {
             margin: const .all(6),
             child: Stack(
               alignment: .center,
-          
+
               children: [
                 Image.asset(
                   "assets/images/backgrounds/background1.jpg",
@@ -40,14 +37,14 @@ class WeaponItem extends StatelessWidget {
                   height: .infinity,
                   width: .infinity,
                 ),
-          
+
                 Padding(
                   padding: const .all(12),
                   child: Container(
-                    child: FadeInImage.memoryNetwork(
-                      placeholder: kTransparentImage,
-                      image: weapon.displayIcon!,
+                    child: CachedNetworkImage(
+                      imageUrl: weapon.displayIcon!,
                       fit: BoxFit.cover,
+                      memCacheHeight: 600,
                     ),
                   ),
                 ),
@@ -57,7 +54,10 @@ class WeaponItem extends StatelessWidget {
                   right: 6,
                   child: Text(
                     weapon.displayName!,
-                    style: const TextStyle(fontSize: 18, color: MyColors.myWhite),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: MyColors.myWhite,
+                    ),
                   ),
                 ),
                 Positioned(
@@ -72,7 +72,6 @@ class WeaponItem extends StatelessWidget {
                       "${weapon.shopData != null ? weapon.shopData!.cost.toString() : 'Owned'} \$",
                       style: const TextStyle(
                         fontSize: 18,
-                        // fontVariations: [FontVariation.italic(0.129)],
                         color: MyColors.myWhite,
                       ),
                     ),
@@ -84,56 +83,5 @@ class WeaponItem extends StatelessWidget {
         ),
       ),
     );
-    // return Container(
-    //   width: double.infinity,
-    //   margin: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-    //   padding: EdgeInsetsDirectional.all(4),
-    //   decoration: BoxDecoration(
-    //     color: MyColors.myWhite,
-    //     borderRadius: BorderRadius.circular(8),
-    //   ),
-    //   child: InkWell(
-    //     onTap: () => Navigator.pushNamed(
-    //       context,
-    //       weaponDatailsScreen,
-    //       arguments: weapon,
-    //     ),
-    //     child: GridTile(
-    //       child: Hero(
-    //         tag: weapon.uuid!,
-    //         child: Container(
-    //           color: MyColors.myGrey,
-    //           child: weapon.displayIcon != null
-    //               ? FadeInImage.assetNetwork(
-    //                   width: double.infinity,
-    //                   height: double.infinity,
-    //                   placeholder: "assets/images/backgrounds/maps_placeholder.gif",
-    //                   image: weapon.displayIcon!,
-    //                   fit: BoxFit.cover,
-    //                 )
-    //               : Image.asset('assets/images/placeholder.jpg'),
-    //         ),
-    //       ),
-    //       footer: Container(
-    //         width: double.infinity,
-    //         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-    //         color: Colors.black54,
-    //         alignment: Alignment.bottomCenter,
-    //         child: Text(
-    //           '${weapon.displayName}',
-    //           style: TextStyle(
-    //             height: 1.3,
-    //             fontSize: 16,
-    //             color: MyColors.myWhite,
-    //             fontWeight: FontWeight.bold,
-    //           ),
-    //           overflow: TextOverflow.ellipsis,
-    //           maxLines: 2,
-    //           textAlign: TextAlign.center,
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    // );
   }
 }

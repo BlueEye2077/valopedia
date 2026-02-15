@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:valopedia/business_logic/cubit/maps/maps_cubit.dart';
-import 'package:valopedia/business_logic/cubit/weapons/weapons_cubit.dart';
-import 'package:valopedia/data/models/map/valorant_map.dart';
-import 'package:valopedia/data/models/weapon/weapon.dart';
-import 'package:valopedia/presentation/screens/agents_screen.dart';
-import 'package:valopedia/presentation/screens/favourite_agents_screen.dart';
-import 'package:valopedia/presentation/screens/favourite_maps_screen.dart';
-import 'package:valopedia/presentation/screens/favourite_weapons_screen.dart';
-import 'package:valopedia/presentation/screens/root_screen.dart';
-import 'package:valopedia/presentation/screens/valorant_map_details_screen.dart';
-import 'package:valopedia/presentation/screens/weapon_details_screen.dart';
+import 'business_logic/cubit/maps/maps_cubit.dart';
+import 'business_logic/cubit/weapons/weapons_cubit.dart';
+import 'data/models/map/valorant_map.dart';
+import 'data/models/weapon/weapon.dart';
+import 'presentation/screens/all_weapon_skins_screen.dart';
+import 'presentation/screens/all_weapon_stats_screen.dart';
+import 'presentation/screens/favourite_agents_screen.dart';
+import 'presentation/screens/favourite_maps_screen.dart';
+import 'presentation/screens/favourite_weapons_screen.dart';
+import 'presentation/screens/root_screen.dart';
+import 'presentation/screens/valorant_map_details_screen.dart';
+import 'presentation/screens/weapon_details_screen.dart';
 
 import 'business_logic/cubit/agents/agents_cubit.dart';
 import 'business_logic/cubit/favourites/favourites_cubit.dart';
@@ -43,7 +44,7 @@ class AppRouter {
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       // case splashScreen:
-        // return MaterialPageRoute(builder: (_) => const SplashScreen());
+      // return MaterialPageRoute(builder: (_) => const SplashScreen());
 
       case rootScreen:
         return MaterialPageRoute(
@@ -106,12 +107,25 @@ class AppRouter {
             child: const FavouriteMapsScreen(),
           ),
         );
+
       case favouriteWeaponsScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider.value(
             value: favouriteWeaponsCubit,
             child: const FavouriteWeaponsScreen(),
           ),
+        );
+
+      case allWeaponStatsScreen:
+        final Weapon weapon = settings.arguments as Weapon;
+        return MaterialPageRoute(
+          builder: (_) => AllWeaponStatsScreen(weapon: weapon),
+        );
+
+      case allWeaponSkinsScreen:
+        final Weapon weapon = settings.arguments as Weapon;
+        return MaterialPageRoute(
+          builder: (_) => AllWeaponSkinsScreen(weapon: weapon),
         );
     }
 

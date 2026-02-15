@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
-import 'package:valopedia/presentation/widgets/custom_sliver_app_bar.dart';
-import 'package:valopedia/presentation/widgets/section_title.dart';
+import '../widgets/custom_sliver_app_bar.dart';
+import '../widgets/section_title.dart';
 
 import '../../business_logic/cubit/favourites/favourites_cubit.dart';
 import '../../constants/my_colors.dart';
@@ -36,15 +36,19 @@ class _AgentDetailsScreenState extends State<AgentDetailsScreen> {
               "assets/images/backgrounds/background2.jpg",
             ),
           ),
-          Hero(
-            tag: widget.agent.uuid!,
+          Material(
+            type: MaterialType.transparency,
+            child: Hero(
+              tag: widget.agent.uuid!,
 
-            child: CachedNetworkImage(
-              imageUrl: widget.agent.fullPortrait!,
-              fit: BoxFit.cover,
-              placeholder: (context, url) =>
-                  Image.asset("assets/images/jet.gif", fit: BoxFit.cover),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
+              child: CachedNetworkImage(
+                imageUrl: widget.agent.fullPortrait!,
+                fit: BoxFit.cover,
+                memCacheHeight: 800,
+                placeholder: (context, url) =>
+                    Image.asset("assets/images/jet.gif", fit: BoxFit.cover),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+              ),
             ),
           ),
         ],
@@ -89,8 +93,6 @@ class _AgentDetailsScreenState extends State<AgentDetailsScreen> {
     return SliverList(
       delegate: SliverChildListDelegate([
         Container(
-          // padding: EdgeInsets.all(8),
-          // margin: EdgeInsets.all(8),
           child: Column(
             children: [
               const DetailsDivider(

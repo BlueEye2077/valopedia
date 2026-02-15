@@ -18,3 +18,5 @@ const String favouriteAgenetsScreen = "/agents_favourites_screen";
 const String favouriteMapsScreen = "/maps_favourites_screen";
 const String favouriteWeaponsScreen = "/weapons_favourites_screen";
 
+const String allWeaponStatsScreen = "/all_weapon_stats_screen";
+const String allWeaponSkinsScreen = "/all_weapon_skins_screen";

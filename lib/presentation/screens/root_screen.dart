@@ -1,13 +1,12 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/rpg_awesome_icons.dart';
-import 'package:valopedia/constants/my_colors.dart';
-import 'package:valopedia/presentation/screens/agents_screen.dart';
-import 'package:valopedia/presentation/screens/maps_screen.dart';
-import 'package:valopedia/presentation/screens/weapons_screen.dart';
-import 'package:valopedia/presentation/widgets/app_drawer.dart';
+import '../../constants/my_colors.dart';
+import 'agents_screen.dart';
+import 'maps_screen.dart';
+import 'weapons_screen.dart';
+import '../widgets/app_drawer.dart';
 
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key});
@@ -58,7 +57,7 @@ class _RootScreenState extends State<RootScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      drawer: AppDrawer(),
+      drawer: const AppDrawer(),
 
       body: PageView(
         controller: _pageController,

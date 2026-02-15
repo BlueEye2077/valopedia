@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:valopedia/data/models/weapon/weapon.dart';
-import 'package:valopedia/presentation/screens/generic_favourites_screen.dart';
-import 'package:valopedia/presentation/widgets/weapons_list_view.dart';
+import '../../data/models/weapon/weapon.dart';
+import 'generic_favourites_screen.dart';
+import '../widgets/weapons_list_view.dart';
 
 class FavouriteWeaponsScreen extends StatelessWidget {
   const FavouriteWeaponsScreen({super.key});

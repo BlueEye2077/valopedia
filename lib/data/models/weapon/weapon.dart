@@ -48,6 +48,7 @@ class WeaponStats {
   String? wallPenetration;
   String? feature;
   String? altFireType;
+  String? fireMode;
   AdsStats? adsStats;
   List<DamageRanges>? damageRanges;
 
@@ -61,7 +62,7 @@ class WeaponStats {
     shotgunPelletCount = json['shotgunPelletCount'];
     wallPenetration = json['wallPenetration'];
     feature = json['feature'];
-    // fireMode = json['fireMode'];
+    fireMode = json['fireMode'];
     altFireType = json['altFireType'];
     adsStats = json['adsStats'] != null
         ? AdsStats.fromJson(json['adsStats'])

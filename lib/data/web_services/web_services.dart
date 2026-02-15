@@ -20,7 +20,6 @@ class WebServices {
   Future<List<dynamic>> getAllAgents() async {
     try {
       Response response = await dio.get("agents");
-      print("agent api sent");
       return response.data["data"];
     } catch (e) {
       return [];
@@ -31,7 +30,6 @@ class WebServices {
   Future<List<dynamic>> getAllMaps() async {
     try {
       Response response = await dio.get("maps");
-      print("maps api sent");
       return response.data["data"];
     } catch (e) {
       return [];
@@ -42,7 +40,6 @@ class WebServices {
   Future<List<dynamic>> getAllWeapons() async {
     try {
       Response response = await dio.get("weapons");
-      print("weapons api sent");
       return response.data["data"];
     } catch (e) {
       return [];

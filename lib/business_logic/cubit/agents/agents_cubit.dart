@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+
 import '../../../data/models/agent/agent.dart';
 import '../../../data/repository/repository.dart';
 
@@ -20,7 +21,6 @@ class AgentsCubit extends Cubit<AgentsState> {
     // } else {
       agentsRepository.getAllAgents().then((agents) {
         allAgents = agents;
-        print("another api call my guy");
         emit(AgentsLoaded(allAgents));
         return;
       });

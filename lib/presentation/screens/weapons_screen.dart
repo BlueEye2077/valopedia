@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_offline/flutter_offline.dart';
-import 'package:valopedia/business_logic/cubit/weapons/weapons_cubit.dart';
-import 'package:valopedia/data/models/weapon/weapon.dart';
-import 'package:valopedia/presentation/widgets/app_drawer.dart';
-import 'package:valopedia/presentation/widgets/app_loading_indicator.dart';
-import 'package:valopedia/presentation/widgets/interactive_app_bar.dart';
-import 'package:valopedia/presentation/widgets/no_internet_widget.dart';
-import 'package:valopedia/presentation/widgets/weapons_list_view.dart';
+import '../../business_logic/cubit/weapons/weapons_cubit.dart';
+import '../../data/models/weapon/weapon.dart';
+import '../widgets/app_drawer.dart';
+import '../widgets/app_loading_indicator.dart';
+import '../widgets/interactive_app_bar.dart';
+import '../widgets/no_internet_widget.dart';
+import '../widgets/weapons_list_view.dart';
 
 class WeaponsScreen extends StatefulWidget {
   const WeaponsScreen({super.key});
@@ -54,7 +54,6 @@ class _WeaponsScreenState extends State<WeaponsScreen>
             ),
           )
           .toList();
-      print(searchedWeapons);
     });
   }
 

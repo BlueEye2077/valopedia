@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:valopedia/business_logic/cubit/favourites/favourites_cubit.dart';
-import 'package:valopedia/constants/my_colors.dart';
+import '../../business_logic/cubit/favourites/favourites_cubit.dart';
+import '../../constants/my_colors.dart';
 
 class CustomSliverAppBar<T> extends StatelessWidget {
   final T item;

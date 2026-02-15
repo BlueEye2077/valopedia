@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:valopedia/data/models/weapon/weapon.dart';
-import 'package:valopedia/data/repository/repository.dart';
+import '../../../data/models/weapon/weapon.dart';
+import '../../../data/repository/repository.dart';
 
 part 'weapons_state.dart';
 

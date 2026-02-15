@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:valopedia/presentation/screens/splash_screen.dart';
 
 import '../../constants/my_colors.dart';
 import '../../constants/my_fonts.dart';
@@ -48,27 +47,32 @@ class AgentItem extends StatelessWidget {
           children: [
             CachedNetworkImage(
               imageUrl: agent.background ?? "",
-              fit: .cover,
+              fit: BoxFit.cover,
+              memCacheHeight: 600,
+
               errorWidget: (context, url, error) =>
                   Container(color: MyColors.myGrey),
             ),
 
-            Hero(
-              tag: agent.uuid!,
-
-              child: CachedNetworkImage(
-                height: double.infinity,
-                width: double.infinity,
-                alignment: Alignment.center,
-                fit: BoxFit.cover,
-                imageUrl:
-                    agent.fullPortrait ??
-                    agent.fullPortraitV2 ??
-                    agent.bustPortrait ??
-                    "",
-                errorWidget: (context, url, error) => const Icon(Icons.error),
-                placeholder: (context, url) =>
-                    Image.asset("assets/images/jet.gif", fit: BoxFit.cover),
+            Material(
+              type: MaterialType.transparency,
+              child: Hero(
+                tag: agent.uuid!,
+                child: CachedNetworkImage(
+                  imageUrl:
+                      agent.fullPortrait ??
+                      agent.fullPortraitV2 ??
+                      agent.bustPortrait ??
+                      "",
+                  height: double.infinity,
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  fit: BoxFit.cover,
+                  memCacheHeight: 800,
+                  placeholder: (context, url) =>
+                      Image.asset("assets/images/jet.gif", fit: BoxFit.cover),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                ),
               ),
             ),
           ],
@@ -83,7 +87,6 @@ class AgentItem extends StatelessWidget {
       onTap: () =>
           Navigator.pushNamed(context, agentDetailsScreen, arguments: agent),
 
-     
       child: Container(
         padding: const EdgeInsets.all(1),
         margin: const EdgeInsets.fromLTRB(8, 8, 8, 0),

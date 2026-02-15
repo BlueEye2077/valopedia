@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:valopedia/data/models/map/valorant_map.dart';
-import 'package:valopedia/presentation/widgets/valorant_map_item.dart';
+import '../../data/models/map/valorant_map.dart';
+import 'valorant_map_item.dart';
 
 class MapsListView extends StatelessWidget {
   final List<ValorantMap> maps;

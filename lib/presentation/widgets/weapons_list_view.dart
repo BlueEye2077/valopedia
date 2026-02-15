@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:valopedia/data/models/weapon/weapon.dart';
-import 'package:valopedia/presentation/widgets/weapon_item.dart';
+import '../../data/models/weapon/weapon.dart';
+import 'weapon_item.dart';
 
 class WeaponsListView extends StatelessWidget {
   final List<Weapon> weapons;

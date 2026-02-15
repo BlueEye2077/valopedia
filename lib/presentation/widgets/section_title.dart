@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:valopedia/constants/my_colors.dart';
+import '../../constants/my_colors.dart';
 
 class SectionTitle extends StatelessWidget {
   final String title;

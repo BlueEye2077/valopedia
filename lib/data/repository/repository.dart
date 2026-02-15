@@ -1,7 +1,6 @@
-import 'package:valopedia/data/models/map/valorant_map.dart';
-import 'package:valopedia/data/models/weapon/weapon.dart';
-
 import '../models/agent/agent.dart';
+import '../models/map/valorant_map.dart';
+import '../models/weapon/weapon.dart';
 import '../web_services/web_services.dart';
 
 class Repository {

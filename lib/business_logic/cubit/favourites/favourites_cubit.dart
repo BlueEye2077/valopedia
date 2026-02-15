@@ -25,8 +25,6 @@ class FavouritesCubit<T> extends Cubit<FavouritesState<T>> {
       }
     } else {
       favourites = [...favourites, item];
-      print(("is added"));
-      print((favourites));
       emit(FavouritesLoaded(favourites: favourites));
       
     }

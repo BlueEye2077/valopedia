@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:valopedia/data/models/agent/agent.dart';
-import 'package:valopedia/presentation/screens/generic_favourites_screen.dart';
-import 'package:valopedia/presentation/widgets/agents_gridview.dart';
+import '../../data/models/agent/agent.dart';
+import 'generic_favourites_screen.dart';
+import '../widgets/agents_gridview.dart';
 
 class FavouriteAgentsScreen extends StatelessWidget {
   const FavouriteAgentsScreen({super.key});

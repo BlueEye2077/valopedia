@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_offline/flutter_offline.dart';
-import 'package:valopedia/business_logic/cubit/maps/maps_cubit.dart';
-import 'package:valopedia/constants/my_colors.dart';
-import 'package:valopedia/data/models/map/valorant_map.dart';
-import 'package:valopedia/presentation/widgets/app_drawer.dart';
-import 'package:valopedia/presentation/widgets/app_loading_indicator.dart';
-import 'package:valopedia/presentation/widgets/interactive_app_bar.dart';
-import 'package:valopedia/presentation/widgets/maps_list_view.dart';
-import 'package:valopedia/presentation/widgets/no_internet_widget.dart';
+import '../../business_logic/cubit/maps/maps_cubit.dart';
+import '../../constants/my_colors.dart';
+import '../../data/models/map/valorant_map.dart';
+import '../widgets/app_drawer.dart';
+import '../widgets/app_loading_indicator.dart';
+import '../widgets/interactive_app_bar.dart';
+import '../widgets/maps_list_view.dart';
+import '../widgets/no_internet_widget.dart';
 
 class MapsScreen extends StatefulWidget {
   const MapsScreen({super.key});
@@ -29,8 +29,6 @@ class _MapsScreenState extends State<MapsScreen>
     return BlocBuilder<MapsCubit, MapsState>(
       builder: (context, state) {
         if (state is MapsLoaded) {
-          print("this is maps listview build");
-
           allMaps = (state).maps;
           return searchedMaps.isNotEmpty
               ? MapsListView(maps: searchedMaps)

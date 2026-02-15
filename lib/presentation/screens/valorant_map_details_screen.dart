@@ -2,12 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
-import 'package:valopedia/business_logic/cubit/favourites/favourites_cubit.dart';
-import 'package:valopedia/constants/my_colors.dart';
-import 'package:valopedia/data/models/map/valorant_map.dart';
-import 'package:valopedia/presentation/widgets/custom_sliver_app_bar.dart';
-import 'package:valopedia/presentation/widgets/details_divider.dart';
-import 'package:valopedia/presentation/widgets/section_title.dart';
+import '../../business_logic/cubit/favourites/favourites_cubit.dart';
+import '../../constants/my_colors.dart';
+import '../../data/models/map/valorant_map.dart';
+import '../widgets/custom_sliver_app_bar.dart';
+import '../widgets/details_divider.dart';
+import '../widgets/section_title.dart';
 
 class ValorantMapDetailsScreen extends StatelessWidget {
   final ValorantMap valorantMap;

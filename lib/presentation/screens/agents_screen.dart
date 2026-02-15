@@ -38,7 +38,6 @@ class _AgentScreenState extends State<AgentsScreen>
         if (state is AgentsLoaded) {
           allAgents = (state).agents;
 
-          print("this is bad i think");
           return _buildAgentGridView();
         } else {
           return const AppLoadingIndicator();

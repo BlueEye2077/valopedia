@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:valopedia/data/models/agent/agent.dart';
+import '../../data/models/agent/agent.dart';
 import 'agent_item.dart';
 
 class AgentsGridview extends StatelessWidget {
@@ -10,10 +10,10 @@ class AgentsGridview extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       physics: const ClampingScrollPhysics(),
-      // addAutomaticKeepAlives: true,
-      // addRepaintBoundaries: true,
+      addAutomaticKeepAlives: true,
+      addRepaintBoundaries: true,
       shrinkWrap: true,
-      // cacheExtent: 2000,
+      cacheExtent: 2000,
       itemCount: items.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,

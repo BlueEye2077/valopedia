@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:valopedia/constants/my_colors.dart';
-import 'package:valopedia/constants/strings.dart';
-import 'package:valopedia/data/models/map/valorant_map.dart';
+import '../../constants/my_colors.dart';
+import '../../constants/strings.dart';
+import '../../data/models/map/valorant_map.dart';
 
 class ValorantMapItem extends StatelessWidget {
   final ValorantMap valorantMap;
@@ -29,24 +29,30 @@ class ValorantMapItem extends StatelessWidget {
           children: [
             Hero(
               tag: valorantMap.uuid!,
-              child: CachedNetworkImage(
-                imageUrl: valorantMap.splash!,
-                cacheKey: valorantMap.uuid, // Explicit cache key
-                fit: BoxFit.cover,
-                memCacheWidth: 800, // Optimize memory cache
-                memCacheHeight: 450, // Optimize memory cache
-                maxWidthDiskCache: 1000, // Optimize disk cache
-                maxHeightDiskCache: 600, // Optimize disk cache
-                width: .infinity,
-                // height: MediaQuery.of(context).size.height * 0.25,
-                height: 200,
-
-                placeholder: (context, url) => Image.asset(
-                  "assets/images/backgrounds/maps_placeholder.gif",
-                  fit: .cover,
-
+              child: Container(
+                color: MyColors.myLightGrey,
+                child: CachedNetworkImage(
+                  
+                  imageUrl: valorantMap.splash!,
+                  cacheKey: valorantMap.uuid, // Explicit cache key
+                  fit: BoxFit.cover,
+                  memCacheWidth: 800, // Optimize memory cache
+                  memCacheHeight: 450, // Optimize memory cache
+                  maxWidthDiskCache: 1000, // Optimize disk cache
+                  maxHeightDiskCache: 600, // Optimize disk cache
                   width: .infinity,
-                  // height: 200,
+                  // height: MediaQuery.of(context).size.height * 0.25,
+                  height: 200,
+                
+                  placeholder: (context, url) => Image.asset(
+                    "assets/images/placeholders/black_flag.gif",
+                
+                    fit: .fitHeight,
+                    // fit: .
+                
+                    // width: .infinity,
+                    // height: 200,
+                  ),
                 ),
               ),
             ),

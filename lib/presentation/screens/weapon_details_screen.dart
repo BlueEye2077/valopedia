@@ -1,15 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/rpg_awesome_icons.dart';
-import 'package:transparent_image/transparent_image.dart';
-import 'package:valopedia/business_logic/cubit/favourites/favourites_cubit.dart';
-import 'package:valopedia/constants/my_colors.dart';
-import 'package:valopedia/data/models/weapon/weapon.dart';
-import 'package:valopedia/presentation/widgets/custom_sliver_app_bar.dart';
-import 'package:valopedia/presentation/widgets/details_divider.dart';
-import 'package:valopedia/presentation/widgets/section_title.dart';
+
+import '../../business_logic/cubit/favourites/favourites_cubit.dart';
+import '../../constants/my_colors.dart';
+import '../../constants/strings.dart';
+import '../../data/models/weapon/weapon.dart';
+import '../widgets/custom_sliver_app_bar.dart';
+import '../widgets/details_divider.dart';
+import '../widgets/section_title.dart';
+import '../widgets/skin_card_item.dart';
+import '../widgets/stats_snapshot.dart';
+import '../widgets/weapon_section_title.dart';
 
 class WeaponDatailsScreen extends StatelessWidget {
   final Weapon weapon;
@@ -33,13 +38,10 @@ class WeaponDatailsScreen extends StatelessWidget {
 
               Padding(
                 padding: const .all(12),
-
-                child: FadeInImage.memoryNetwork(
-                  // width: double.infinity,
-                  // height: double.infinity,
-                  placeholder: kTransparentImage,
-                  image: weapon.displayIcon!,
+                child: CachedNetworkImage(
+                  imageUrl: weapon.displayIcon ?? "",
                   fit: BoxFit.cover,
+                  memCacheHeight: 600,
                 ),
               ),
             ],
@@ -50,141 +52,58 @@ class WeaponDatailsScreen extends StatelessWidget {
   }
 
   Widget _buildSliverBody() {
+    var weaponStats = weapon.weaponStats;
     return SliverList(
       delegate: SliverChildListDelegate([
-        Container(
-          margin: const .symmetric(vertical: 12, horizontal: 16),
-          child: Column(
-            crossAxisAlignment: .start,
-            children: [
-              const SizedBox(height: 20),
+        weaponStats != null
+            ? Container(
+                margin: const .symmetric(vertical: 12, horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: .start,
+                  children: [
+                    const SizedBox(height: 20),
 
-              _buildWeaponSectionTitle("Statistics"),
-              const SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: .start,
-                children: [
-                  Expanded(
-                    child: _buildStatisticsCard(
-                      "Fire Rate",
-                      weapon.weaponStats!.fireRate.toString(),
-                      "rds/sec",
-                      Icons.local_fire_department,
+                    WeaponSectionTitle(
+                      title: "Statistics",
+                      weapon: weapon,
+                      route: allWeaponStatsScreen,
                     ),
-                  ),
-                  Expanded(
-                    child: _buildStatisticsCard(
-                      "Reload",
-                      weapon.weaponStats!.reloadTimeSeconds.toString(),
-                      "seconds",
-                      Icons.replay_outlined,
+                    const SizedBox(height: 12),
+
+                    StatsSnapshot(weaponStats: weaponStats),
+
+                    const SizedBox(height: 6),
+                    const DetailsDivider(),
+                    const SizedBox(height: 6),
+                    const SectionTitle(
+                      title: "Damage Ranges",
+                      textAlign: .left,
                     ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: .start,
-                children: [
-                  Expanded(
-                    child: _buildStatisticsCard(
-                      "Equip",
-                      weapon.weaponStats!.equipTimeSeconds.toString(),
-                      "seconds",
-                      Icons.watch_later,
+                    const SizedBox(height: 12),
+                    _buildDamageRangesTable(weaponStats),
+                    const SizedBox(height: 6),
+                    const DetailsDivider(),
+                    const SizedBox(height: 6),
+
+                    //todo: add skins
+                    WeaponSectionTitle(
+                      title: "Skins",
+                      weapon: weapon,
+                      route: allWeaponSkinsScreen,
                     ),
-                  ),
-                  Expanded(
-                    child: _buildStatisticsCard(
-                      "Zoom",
-                      "${weapon.weaponStats!.magazineSize.toString()}x",
-                      "magnification",
-                      RpgAwesome.targeted,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 6),
-              const DetailsDivider(),
-              const SizedBox(height: 6),
-              const SectionTitle(title: "Damage Ranges", textAlign: .left),
-              const SizedBox(height: 12),
-              _buildDamageRangesTable(),
-              const DetailsDivider(),
-            ],
-          ),
-        ),
+
+                    const SizedBox(height: 12),
+
+                    _buildSkinsCarousel(),
+                  ],
+                ),
+              )
+            : _buildNoWeaponStatsWidget(),
       ]),
     );
   }
 
-  Widget _buildStatisticsCard(
-    String title,
-    String statistics,
-    String unit,
-    IconData icon,
-  ) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        side: const BorderSide(color: Color.fromARGB(89, 178, 180, 188)),
-        borderRadius: BorderRadiusGeometry.circular(12),
-      ),
-      elevation: 3,
-      color: const Color(0xFF1F2B38),
-      child: Container(
-        width: .infinity,
-        // height: height,
-        margin: const .all(12),
-        child: Column(
-          crossAxisAlignment: .start,
-
-          children: [
-            Row(
-              mainAxisAlignment: .spaceBetween,
-              mainAxisSize: .max,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(color: MyColors.mySilver),
-                  textAlign: .start,
-                ),
-                Icon(icon, color: MyColors.myRed, size: 24),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Text(
-              statistics,
-              style: const TextStyle(color: MyColors.myWhite, fontSize: 24),
-              textAlign: .start,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              unit,
-              style: const TextStyle(color: MyColors.mySilver),
-              textAlign: .start,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildWeaponSectionTitle(String title) {
-    return Row(
-      mainAxisAlignment: .spaceBetween,
-      children: [
-        SectionTitle(title: title),
-        TextButton(
-          onPressed: () {},
-          child: const Text(
-            "View all",
-            style: TextStyle(color: MyColors.myWhite),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildDamageRangesTable() {
+  Widget _buildDamageRangesTable(WeaponStats weaponStats) {
     return Table(
       defaultVerticalAlignment: .middle,
       columnWidths: const {0: IntrinsicColumnWidth()},
@@ -210,7 +129,7 @@ class WeaponDatailsScreen extends StatelessWidget {
         ),
 
         // BodyRows
-        ...weapon.weaponStats!.damageRanges!.map(
+        ...weaponStats.damageRanges!.map(
           (damageRangeArea) => TableRow(
             children: [
               _buildBodyCell(
@@ -251,6 +170,49 @@ class WeaponDatailsScreen extends StatelessWidget {
         title,
         style: TextStyle(color: MyColors.myWhite, fontSize: fontSize),
         textAlign: .center,
+      ),
+    );
+  }
+
+  Widget _buildNoWeaponStatsWidget() {
+    return Container(
+      margin: const .symmetric(vertical: 12, horizontal: 16),
+      child: const Center(
+        child: Text(
+          "Just the good old knife",
+          style: TextStyle(color: MyColors.myWhite, fontSize: 24),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSkinsCarousel() {
+    final List<Skins> skins = weapon.skins!
+        .where(
+          (skin) =>
+              skin.displayIcon != null &&
+              !skin.displayName!.contains("Standard"),
+        )
+        .toList();
+    return CarouselSlider.builder(
+      itemCount: skins.length,
+      itemBuilder: (context, index, realIndex) {
+        return SkinCardItem(skin: skins[index]);
+      },
+      options: CarouselOptions(
+        // height: 400,
+        aspectRatio: 3 / 2,
+        viewportFraction: 0.8,
+        initialPage: 0,
+        enableInfiniteScroll: true,
+        reverse: false,
+        autoPlay: true,
+        autoPlayInterval: const Duration(seconds: 3),
+        autoPlayAnimationDuration: const Duration(milliseconds: 800),
+        autoPlayCurve: Curves.fastOutSlowIn,
+        enlargeCenterPage: true,
+        enlargeFactor: 0.3,
+        scrollDirection: Axis.horizontal,
       ),
     );
   }

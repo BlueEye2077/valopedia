@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cached_network_image: ^3.4.1
+  carousel_slider: ^5.1.2
   cupertino_icons: ^1.0.8
   curved_navigation_bar: ^1.0.6
   dio: ^5.9.0
@@ -63,6 +64,7 @@ flutter:
     - assets/images/
     - assets/images/svgs/
     - assets/images/backgrounds/
+    - assets/images/placeholders/
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
