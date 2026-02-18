@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vibration/vibration.dart';
 import '../../business_logic/cubit/favourites/favourites_cubit.dart';
 import '../../constants/my_colors.dart';
 
@@ -23,8 +24,11 @@ class CustomSliverAppBar<T> extends StatelessWidget {
     return SliverAppBar(
       actions: [
         IconButton(
-          onPressed: () {
+          onPressed: () async {
             BlocProvider.of<FavouritesCubit<T>>(context).toggleFavourites(item);
+            if (await Vibration.hasAmplitudeControl()) {
+              Vibration.vibrate(amplitude: 50, duration: 100);
+            }
           },
           icon: isFav
               ? const Icon(Icons.favorite_sharp)
