@@ -14,7 +14,7 @@ class WeaponItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () =>
-          Navigator.pushNamed(context, weaponDatailsScreen, arguments: weapon),
+          Navigator.pushNamed(context, weaponDetailsScreen, arguments: weapon),
       child: Hero(
         tag: weapon.uuid!,
         child: Material(
@@ -40,12 +40,10 @@ class WeaponItem extends StatelessWidget {
 
                 Padding(
                   padding: const .all(12),
-                  child: Container(
-                    child: CachedNetworkImage(
-                      imageUrl: weapon.displayIcon!,
-                      fit: BoxFit.cover,
-                      memCacheHeight: 600,
-                    ),
+                  child: CachedNetworkImage(
+                    imageUrl: weapon.displayIcon!,
+                    fit: BoxFit.cover,
+                    memCacheHeight: 600,
                   ),
                 ),
                 Positioned(

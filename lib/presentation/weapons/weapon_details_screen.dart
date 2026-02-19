@@ -16,36 +16,34 @@ import 'widgets/skin_card_item.dart';
 import 'widgets/stats_snapshot.dart';
 import 'widgets/weapon_section_title.dart';
 
-class WeaponDatailsScreen extends StatelessWidget {
+class WeaponDetailsScreen extends StatelessWidget {
   final Weapon weapon;
-  const WeaponDatailsScreen({super.key, required this.weapon});
+  const WeaponDetailsScreen({super.key, required this.weapon});
 
   Widget _flexibleSpaceBarBackground() {
     return Hero(
       tag: weapon.uuid!,
       child: Material(
         type: MaterialType.transparency,
-        child: Container(
-          child: Stack(
-            alignment: .center,
-            children: [
-              Image.asset(
-                "assets/images/backgrounds/weapon_background.jpg",
-                fit: .cover,
-                height: .infinity,
-                width: .infinity,
+        child: Stack(
+          alignment: .center,
+          children: [
+            Image.asset(
+              "assets/images/backgrounds/weapon_background.jpg",
+              fit: .cover,
+              height: .infinity,
+              width: .infinity,
+            ),
+        
+            Padding(
+              padding: const .all(12),
+              child: CachedNetworkImage(
+                imageUrl: weapon.displayIcon ?? "",
+                fit: BoxFit.cover,
+                memCacheHeight: 600,
               ),
-
-              Padding(
-                padding: const .all(12),
-                child: CachedNetworkImage(
-                  imageUrl: weapon.displayIcon ?? "",
-                  fit: BoxFit.cover,
-                  memCacheHeight: 600,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

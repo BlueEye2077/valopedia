@@ -6,14 +6,14 @@ class WebServices {
   late Dio dio;
 
   WebServices() {
-    BaseOptions baseOpttions = BaseOptions(
+    BaseOptions baseOptions = BaseOptions(
       baseUrl: baseUrl,
       receiveDataWhenStatusError: true,
       connectTimeout: const Duration(seconds: 10),
       receiveTimeout: const Duration(seconds: 10),
     );
 
-    dio = Dio(baseOpttions);
+    dio = Dio(baseOptions);
   }
 
   // The function to get all the agents

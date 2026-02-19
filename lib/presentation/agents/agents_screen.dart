@@ -55,14 +55,12 @@ class _AgentScreenState extends State<AgentsScreen>
 
   Widget _buildAgentGridView() {
     return SingleChildScrollView(
-      child: Container(
-        child: Column(
-          children: [
-            AgentsGridview(
-              items: searchedAgents.isNotEmpty ? searchedAgents : allAgents,
-            ),
-          ],
-        ),
+      child: Column(
+        children: [
+          AgentsGridview(
+            items: searchedAgents.isNotEmpty ? searchedAgents : allAgents,
+          ),
+        ],
       ),
     );
   }

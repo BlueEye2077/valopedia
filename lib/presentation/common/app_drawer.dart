@@ -59,7 +59,7 @@ class AppDrawer extends StatelessWidget {
               ListTile(
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).pushNamed(favouriteAgenetsScreen);
+                  Navigator.of(context).pushNamed(favouriteAgentsScreen);
                 },
                 leading: const Icon(
                   RpgAwesome.double_team,

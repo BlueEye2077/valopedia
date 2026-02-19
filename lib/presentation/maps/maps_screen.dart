@@ -68,12 +68,12 @@ class _MapsScreenState extends State<MapsScreen>
 
 
 
-  void _searchMap(String searchedWeapon) {
+  void _searchMap(String searchedMap) {
     setState(() {
       searchedMaps = allMaps
           .where(
-            (weapon) => weapon.displayName!.toLowerCase().trim().contains(
-              searchedWeapon.trim().toLowerCase(),
+            (valorantMap) => valorantMap.displayName!.toLowerCase().trim().contains(
+              searchedMap.trim().toLowerCase(),
             ),
           )
           .toList();

@@ -20,7 +20,7 @@ class ValorantMapItem extends StatelessWidget {
       child: InkWell(
         onTap: () => Navigator.pushNamed(
           context,
-          mapsDatailsScreen,
+          mapDetailsScreen,
           arguments: valorantMap,
         ),
         child: Stack(
@@ -29,23 +29,20 @@ class ValorantMapItem extends StatelessWidget {
           children: [
             Hero(
               tag: valorantMap.uuid!,
-              child: Container(
-                // color: MyColors.myLightGrey,
-                child: CachedNetworkImage(
-                  imageUrl: valorantMap.splash!,
-                  cacheKey: valorantMap.uuid, // Explicit cache key
-                  fit: BoxFit.cover,
-                  memCacheWidth: 800, // Optimize memory cache
-                  memCacheHeight: 450, // Optimize memory cache
-                  maxWidthDiskCache: 1000, // Optimize disk cache
-                  maxHeightDiskCache: 600, // Optimize disk cache
-                  width: .infinity,
-                  // height: MediaQuery.of(context).size.height * 0.25,
-                  height: 200,
-
-                  placeholder: (context, url) =>
-                      Container(color: MyColors.myplaceholderGrey),
-                ),
+              child: CachedNetworkImage(
+                imageUrl: valorantMap.splash!,
+                cacheKey: valorantMap.uuid, // Explicit cache key
+                fit: BoxFit.cover,
+                memCacheWidth: 800, // Optimize memory cache
+                memCacheHeight: 450, // Optimize memory cache
+                maxWidthDiskCache: 1000, // Optimize disk cache
+                maxHeightDiskCache: 600, // Optimize disk cache
+                width: .infinity,
+                // height: MediaQuery.of(context).size.height * 0.25,
+                height: 200,
+              
+                placeholder: (context, url) =>
+                    Container(color: MyColors.myplaceholderGrey),
               ),
             ),
             Positioned(

@@ -22,7 +22,7 @@ import 'data/web_services/web_services.dart';
 import 'presentation/agents/agent_details_screen.dart';
 
 class AppRouter {
-  late Repository agentsRepository;
+  late Repository repository;
   late AgentsCubit agentsCubit;
   late MapsCubit mapsCubit;
   late WeaponsCubit weaponsCubit;
@@ -31,10 +31,10 @@ class AppRouter {
   late FavouritesCubit<Weapon> favouriteWeaponsCubit;
 
   AppRouter() {
-    agentsRepository = Repository(agentWebServices: WebServices());
-    agentsCubit = AgentsCubit(agentsRepository: agentsRepository);
-    mapsCubit = MapsCubit(agentsRepository: agentsRepository);
-    weaponsCubit = WeaponsCubit(agentsRepository: agentsRepository);
+    repository = Repository(webServices: WebServices());
+    agentsCubit = AgentsCubit(agentsRepository: repository);
+    mapsCubit = MapsCubit(agentsRepository: repository);
+    weaponsCubit = WeaponsCubit(agentsRepository: repository);
 
     favouriteAgentsCubit = FavouritesCubit<Agent>();
     favouriteMapsCubit = FavouritesCubit<ValorantMap>();
@@ -43,6 +43,7 @@ class AppRouter {
 
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
+
       // case splashScreen:
       // return MaterialPageRoute(builder: (_) => const SplashScreen());
 
@@ -57,13 +58,6 @@ class AppRouter {
             child: const RootScreen(),
           ),
         );
-      // case agentsScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => BlocProvider.value(
-      //       value: agentsCubit,
-      //       child: const AgentsScreen(),
-      //     ),
-      //   );
 
       case agentDetailsScreen:
         final Agent agent = settings.arguments as Agent;
@@ -74,16 +68,16 @@ class AppRouter {
           ),
         );
 
-      case weaponDatailsScreen:
+      case weaponDetailsScreen:
         final Weapon weapon = settings.arguments as Weapon;
         return MaterialPageRoute(
           builder: (_) => BlocProvider.value(
             value: favouriteWeaponsCubit,
-            child: WeaponDatailsScreen(weapon: weapon),
+            child: WeaponDetailsScreen(weapon: weapon),
           ),
         );
 
-      case mapsDatailsScreen:
+      case mapDetailsScreen:
         final ValorantMap valorantMap = settings.arguments as ValorantMap;
         return MaterialPageRoute(
           builder: (_) => BlocProvider.value(
@@ -92,7 +86,7 @@ class AppRouter {
           ),
         );
 
-      case favouriteAgenetsScreen:
+      case favouriteAgentsScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider.value(
             value: favouriteAgentsCubit,

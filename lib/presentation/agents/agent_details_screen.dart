@@ -24,35 +24,33 @@ class AgentDetailsScreen extends StatefulWidget {
 class _AgentDetailsScreenState extends State<AgentDetailsScreen> {
   // Image Stack
   Widget _buildFlexibleSpaceBarBackground() {
-    return Container(
-      child: Stack(
-        alignment: Alignment.center,
-        fit: StackFit.expand,
-        children: [
-          FadeInImage(
-            placeholder: MemoryImage(kTransparentImage),
-            fit: BoxFit.cover,
-            image: const AssetImage(
-              "assets/images/backgrounds/agent_details_background.jpg",
+    return Stack(
+      alignment: Alignment.center,
+      fit: StackFit.expand,
+      children: [
+        FadeInImage(
+          placeholder: MemoryImage(kTransparentImage),
+          fit: BoxFit.cover,
+          image: const AssetImage(
+            "assets/images/backgrounds/agent_details_background.jpg",
+          ),
+        ),
+        Material(
+          type: MaterialType.transparency,
+          child: Hero(
+            tag: widget.agent.uuid!,
+    
+            child: CachedNetworkImage(
+              imageUrl: widget.agent.fullPortrait!,
+              fit: BoxFit.cover,
+              memCacheHeight: 800,
+              placeholder: (context, url) =>
+                  Container(color: MyColors.myGrey),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
-          Material(
-            type: MaterialType.transparency,
-            child: Hero(
-              tag: widget.agent.uuid!,
-
-              child: CachedNetworkImage(
-                imageUrl: widget.agent.fullPortrait!,
-                fit: BoxFit.cover,
-                memCacheHeight: 800,
-                placeholder: (context, url) =>
-                    Container(color: MyColors.myGrey),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -92,28 +90,26 @@ class _AgentDetailsScreenState extends State<AgentDetailsScreen> {
   Widget _buildSliverBody() {
     return SliverList(
       delegate: SliverChildListDelegate([
-        Container(
-          child: Column(
-            children: [
-              const DetailsDivider(
-                color: MyColors.myRed,
-                thickness: 8,
-                indent: 0,
-                endIndent: 0,
-              ),
-
-              _buildSectionWithDescription(
-                "Biography",
-                widget.agent.description!,
-              ),
-              const DetailsDivider(),
-
-              RoleCard(agent: widget.agent),
-              const DetailsDivider(),
-
-              _buildAbilitesSection(),
-            ],
-          ),
+        Column(
+          children: [
+            const DetailsDivider(
+              color: MyColors.myRed,
+              thickness: 8,
+              indent: 0,
+              endIndent: 0,
+            ),
+        
+            _buildSectionWithDescription(
+              "Biography",
+              widget.agent.description!,
+            ),
+            const DetailsDivider(),
+        
+            RoleCard(agent: widget.agent),
+            const DetailsDivider(),
+        
+            _buildAbilitesSection(),
+          ],
         ),
       ]),
     );

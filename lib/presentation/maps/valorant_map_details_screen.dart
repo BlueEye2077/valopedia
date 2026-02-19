@@ -14,21 +14,19 @@ class ValorantMapDetailsScreen extends StatelessWidget {
   const ValorantMapDetailsScreen({super.key, required this.valorantMap});
 
   Widget _buildFlexibleSpaceBarBackground() {
-    return Container(
-      child: Hero(
-        tag: valorantMap.uuid!,
-
-        child: CachedNetworkImage(
-          imageUrl: valorantMap.splash!,
-          cacheKey: valorantMap.uuid!, // Explicit cache key
-          fit: BoxFit.cover,
-          memCacheWidth: 800, // Optimize memory cache
-          memCacheHeight: 450, // Optimize memory cache
-          maxWidthDiskCache: 1000, // Optimize disk cache
-          maxHeightDiskCache: 600, // Optimize disk cache
-          placeholder: (context, url) =>
-              Container(color: MyColors.myplaceholderGrey),
-        ),
+    return Hero(
+      tag: valorantMap.uuid!,
+    
+      child: CachedNetworkImage(
+        imageUrl: valorantMap.splash!,
+        cacheKey: valorantMap.uuid!, // Explicit cache key
+        fit: BoxFit.cover,
+        memCacheWidth: 800, // Optimize memory cache
+        memCacheHeight: 450, // Optimize memory cache
+        maxWidthDiskCache: 1000, // Optimize disk cache
+        maxHeightDiskCache: 600, // Optimize disk cache
+        placeholder: (context, url) =>
+            Container(color: MyColors.myplaceholderGrey),
       ),
     );
   }
@@ -36,81 +34,79 @@ class ValorantMapDetailsScreen extends StatelessWidget {
   Widget _buildSliverBody() {
     return SliverList(
       delegate: SliverChildListDelegate([
-        Container(
-          child: Column(
-            children: [
-              _buildInfoSquareRow(),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const .all(12),
-
-                child: Column(
-                  children: [
-                    valorantMap.displayIcon != null
-                        ? Column(
-                            children: [
-                              const SectionTitle(title: "Map Icon"),
-                              const SizedBox(height: 6),
-                              _buildMapIconCard(
-                                height: 380,
-                                child: _buildImageWithCornersStack(),
+        Column(
+          children: [
+            _buildInfoSquareRow(),
+            const SizedBox(height: 20),
+            Padding(
+              padding: const .all(12),
+        
+              child: Column(
+                children: [
+                  valorantMap.displayIcon != null
+                      ? Column(
+                          children: [
+                            const SectionTitle(title: "Map Icon"),
+                            const SizedBox(height: 6),
+                            _buildMapIconCard(
+                              height: 380,
+                              child: _buildImageWithCornersStack(),
+                            ),
+                            const SizedBox(height: 6),
+                            const DetailsDivider(),
+                            const SizedBox(height: 6),
+                          ],
+                        )
+                      : const SizedBox.shrink(),
+        
+                  valorantMap.stylizedBackgroundImage != null
+                      ? Column(
+                          children: [
+                            const SectionTitle(
+                              title: "Stylized Background Image",
+                            ),
+                            const SizedBox(height: 6),
+                            const DetailsDivider(),
+                            const SizedBox(height: 6),
+                            _buildMapIconCard(
+                              height: 230,
+                              child: FadeInImage.memoryNetwork(
+                                fit: .cover,
+                                placeholder: kTransparentImage,
+                                image: valorantMap.stylizedBackgroundImage!,
                               ),
-                              const SizedBox(height: 6),
-                              const DetailsDivider(),
-                              const SizedBox(height: 6),
-                            ],
-                          )
-                        : const SizedBox.shrink(),
-
-                    valorantMap.stylizedBackgroundImage != null
-                        ? Column(
-                            children: [
-                              const SectionTitle(
-                                title: "Stylized Background Image",
+                            ),
+                          ],
+                        )
+                      : const SizedBox.shrink(),
+        
+                  const DetailsDivider(),
+                  valorantMap.premierBackgroundImage != null
+                      ? Column(
+                          children: [
+                            const SectionTitle(
+                              title: "Premier Background Image",
+                            ),
+        
+                            const SizedBox(height: 6),
+                            const DetailsDivider(),
+                            const SizedBox(height: 6),
+                            _buildMapIconCard(
+                              height: 230,
+                              child: FadeInImage.memoryNetwork(
+                                fit: .cover,
+                                placeholder: kTransparentImage,
+        
+                                image: valorantMap.premierBackgroundImage!,
                               ),
-                              const SizedBox(height: 6),
-                              const DetailsDivider(),
-                              const SizedBox(height: 6),
-                              _buildMapIconCard(
-                                height: 230,
-                                child: FadeInImage.memoryNetwork(
-                                  fit: .cover,
-                                  placeholder: kTransparentImage,
-                                  image: valorantMap.stylizedBackgroundImage!,
-                                ),
-                              ),
-                            ],
-                          )
-                        : const SizedBox.shrink(),
-
-                    const DetailsDivider(),
-                    valorantMap.premierBackgroundImage != null
-                        ? Column(
-                            children: [
-                              const SectionTitle(
-                                title: "Premier Background Image",
-                              ),
-
-                              const SizedBox(height: 6),
-                              const DetailsDivider(),
-                              const SizedBox(height: 6),
-                              _buildMapIconCard(
-                                height: 230,
-                                child: FadeInImage.memoryNetwork(
-                                  fit: .cover,
-                                  placeholder: kTransparentImage,
-
-                                  image: valorantMap.premierBackgroundImage!,
-                                ),
-                              ),
-                            ],
-                          )
-                        : const SizedBox.shrink(),
-                  ],
-                ),
+                            ),
+                          ],
+                        )
+                      : const SizedBox.shrink(),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ]),
     );
@@ -120,11 +116,11 @@ class ValorantMapDetailsScreen extends StatelessWidget {
     return Row(
       mainAxisSize: .max,
       children: [
-        _buildInfoSuare(
+        _buildInfoSquare(
           "Coordinates",
           valorantMap.coordinates ?? "No Coordinates",
         ),
-        _buildInfoSuare(
+        _buildInfoSquare(
           "Tactics",
           valorantMap.tacticalDescription ?? "A/B Sites",
         ),
@@ -132,7 +128,7 @@ class ValorantMapDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildInfoSuare(String title, String data) {
+  Widget _buildInfoSquare(String title, String data) {
     return Expanded(
       child: Container(
         height: 100,

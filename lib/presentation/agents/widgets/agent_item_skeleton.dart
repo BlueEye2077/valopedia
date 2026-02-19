@@ -32,7 +32,7 @@ class AgentItemSkeleton extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.fromLTRB(5, 6, 0, 6),
-              child: RotatedBox(
+              child: const RotatedBox(
                 quarterTurns: 1,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
