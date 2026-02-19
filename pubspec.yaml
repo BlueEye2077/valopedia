@@ -28,55 +28,70 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+
+  # A flutter library to show images from the internet and keep them in the cache directory.
   cached_network_image: ^3.4.1
+  
+  # A carousel slider widget, support infinite scroll and custom child widget.
   carousel_slider: ^5.1.2
+  
+  # Cupertino icons for Flutter.
   cupertino_icons: ^1.0.8
+  
+  # A navigation bar widget with a curved bottom.
   curved_navigation_bar: ^1.0.6
+  
+  # A powerful HTTP client for Dart, supporting requests, responses, and interceptors.
   dio: ^5.9.0
+  
   flutter:
     sdk: flutter
+  
+  # A predictable state management library that helps implement the BLoC.
   flutter_bloc: ^9.1.1
+
+  # Customize Flutter's default white native splash screen with background color and splash image. Supports dark mode, full screen, and more.
   flutter_native_splash: ^2.4.7
+  
+  # A tidy utility to handle offline/online connectivity like a Boss.
   flutter_offline: ^6.0.0
+  
+  # An SVG rendering and widget library for Flutter, which allows painting and displaying Scalable Vector Graphics.
   flutter_svg: ^2.2.3
+  
+  # Flutter icons from popular web icon fonts.
   fluttericon: ^2.0.0
+  
+  # The Font Awesome Icon pack available as Flutter Icons.
   font_awesome_flutter: ^10.12.0
+  
+  # A Flutter package to use fonts from fonts.google.com.
   google_fonts: ^6.3.2
+  
+  # Converts already built widgets into skeleton loaders with no extra effort.
   skeletonizer: ^2.1.3
+  
+  # A transparent image in Dart code, represented as a Uint8List.
   transparent_image: ^2.0.1
+  
+  # A plugin for handling Vibration API on iOS, Android, web and OpenHarmony.
   vibration: ^3.1.7
+  
 
 dev_dependencies:
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-# The following section is specific to Flutter packages.
 flutter:
 
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
-  # To add assets to your application, add an assets section, like this:
   assets:
-    # - assets/
     - assets/images/
     - assets/images/svgs/
     - assets/images/backgrounds/
     - assets/images/placeholders/
-  #   - images/a_dot_ham.jpeg
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/to/resolution-aware-images
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/to/asset-from-package
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
+
   fonts:
 
     - family: DrukWideOutlined
@@ -87,15 +102,3 @@ flutter:
       fonts:
         - asset: assets/fonts/DrukWideBold.ttf
           weight: 700
-    # - family: DrukBody
-    #   fonts:
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/to/font-from-package
