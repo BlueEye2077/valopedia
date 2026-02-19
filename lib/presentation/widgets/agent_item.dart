@@ -69,8 +69,9 @@ class AgentItem extends StatelessWidget {
                   alignment: Alignment.center,
                   fit: BoxFit.cover,
                   memCacheHeight: 800,
-                  placeholder: (context, url) =>
-                      Image.asset("assets/images/jet.gif", fit: BoxFit.cover),
+                  placeholder: (context, url) => 
+                      // Image.asset("assets/images/jet.gif", fit: BoxFit.cover),
+                      Container(color: MyColors.myGrey),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),

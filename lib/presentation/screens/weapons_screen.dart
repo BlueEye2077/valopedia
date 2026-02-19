@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_offline/flutter_offline.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../../business_logic/cubit/weapons/weapons_cubit.dart';
 import '../../data/models/weapon/weapon.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/app_loading_indicator.dart';
 import '../widgets/interactive_app_bar.dart';
 import '../widgets/no_internet_widget.dart';
+import '../widgets/weapon_item_skeleton.dart';
 import '../widgets/weapons_list_view.dart';
 
 class WeaponsScreen extends StatefulWidget {
@@ -32,16 +34,51 @@ class _WeaponsScreenState extends State<WeaponsScreen>
   Widget _buildBlocWidget() {
     return BlocBuilder<WeaponsCubit, WeaponsState>(
       builder: (context, state) {
+        Widget child;
+
         if (state is WeaponsLoaded) {
           allWeapons = (state).weapons;
-          return 
-           searchedWeapons.isNotEmpty
+          child = searchedWeapons.isNotEmpty
               ? WeaponsListView(weapons: searchedWeapons)
               : WeaponsListView(weapons: allWeapons);
         } else {
-          return const AppLoadingIndicator();
+          child = _buildWeaponsSkeletonGridview();
         }
+
+        return AnimatedSwitcher(
+          duration: const Duration(seconds: 1),
+          child: child,
+        );
       },
+    );
+  }
+
+  Widget _buildWeaponsSkeletonGridview() {
+    return Skeletonizer(
+      key: const ValueKey('skeleton'),
+      enabled: true,
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(4),
+        child: Column(
+          children: [
+            GridView.builder(
+              physics: const ClampingScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: 12,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 3 / 2,
+                crossAxisSpacing: 2,
+                mainAxisSpacing: 2,
+              ),
+              padding: EdgeInsets.zero,
+              itemBuilder: (context, index) {
+                return const WeaponItemSkeleton();
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 

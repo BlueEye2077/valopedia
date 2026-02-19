@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_offline/flutter_offline.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../../business_logic/cubit/maps/maps_cubit.dart';
 import '../../constants/my_colors.dart';
 import '../../data/models/map/valorant_map.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/app_loading_indicator.dart';
 import '../widgets/interactive_app_bar.dart';
+import '../widgets/map_item_skeleton.dart';
 import '../widgets/maps_list_view.dart';
 import '../widgets/no_internet_widget.dart';
 
@@ -28,17 +30,43 @@ class _MapsScreenState extends State<MapsScreen>
   Widget buildBlocWidget() {
     return BlocBuilder<MapsCubit, MapsState>(
       builder: (context, state) {
+        Widget child;
+
         if (state is MapsLoaded) {
           allMaps = (state).maps;
-          return searchedMaps.isNotEmpty
+          child = searchedMaps.isNotEmpty
               ? MapsListView(maps: searchedMaps)
               : MapsListView(maps: allMaps);
         } else {
-          return const AppLoadingIndicator();
+          child = _buildMapsSkeletonGridview();
         }
+
+        return AnimatedSwitcher(
+          duration: const Duration(seconds: 1),
+          child: child,
+        );
       },
     );
   }
+
+  Widget _buildMapsSkeletonGridview() {
+    return Skeletonizer(
+      key: const ValueKey('skeleton'),
+      enabled: true,
+      child: SingleChildScrollView(
+        child: ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: 4,
+          itemBuilder: (context, index) {
+            return const MapItemSkeleton();
+          },
+        ),
+      ),
+    );
+  }
+
+
 
   void _searchMap(String searchedWeapon) {
     setState(() {

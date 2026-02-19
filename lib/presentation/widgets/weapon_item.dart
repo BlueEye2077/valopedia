@@ -21,7 +21,7 @@ class WeaponItem extends StatelessWidget {
           type: MaterialType.transparency,
           child: Container(
             width: .infinity,
-            height: 300,
+            height: .infinity,
             decoration: BoxDecoration(
               // borderRadius: BorderRadius.circular(25) ,
               border: Border.all(width: 1, color: Colors.blueGrey),

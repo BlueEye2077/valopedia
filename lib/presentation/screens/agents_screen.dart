@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_offline/flutter_offline.dart';
-
+import 'package:skeletonizer/skeletonizer.dart';
+import 'package:valopedia/presentation/widgets/agent_item_skeleton.dart';
 import '../../business_logic/cubit/agents/agents_cubit.dart';
 import '../../constants/my_colors.dart';
 import '../../data/models/agent/agent.dart';
@@ -35,13 +36,19 @@ class _AgentScreenState extends State<AgentsScreen>
   Widget buildBlocWidget() {
     return BlocBuilder<AgentsCubit, AgentsState>(
       builder: (context, state) {
+        Widget child;
+
         if (state is AgentsLoaded) {
           allAgents = (state).agents;
-
-          return _buildAgentGridView();
+          child = _buildAgentGridView();
         } else {
-          return const AppLoadingIndicator();
+          child = _buildAgentsSkeletonGridview();
         }
+
+        return AnimatedSwitcher(
+          duration: const Duration(seconds: 1),
+          child: child,
+        );
       },
     );
   }
@@ -56,6 +63,26 @@ class _AgentScreenState extends State<AgentsScreen>
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildAgentsSkeletonGridview() {
+    return Skeletonizer(
+      key: const ValueKey('skeleton'),
+      enabled: true,
+      child: GridView.builder(
+        itemCount: 6,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 2 / 3,
+          crossAxisSpacing: 2,
+          mainAxisSpacing: 2,
+        ),
+        padding: EdgeInsets.zero,
+        itemBuilder: (context, index) {
+          return const AgentItemSkeleton();
+        },
       ),
     );
   }

@@ -30,9 +30,8 @@ class ValorantMapItem extends StatelessWidget {
             Hero(
               tag: valorantMap.uuid!,
               child: Container(
-                color: MyColors.myLightGrey,
+                // color: MyColors.myLightGrey,
                 child: CachedNetworkImage(
-                  
                   imageUrl: valorantMap.splash!,
                   cacheKey: valorantMap.uuid, // Explicit cache key
                   fit: BoxFit.cover,
@@ -43,16 +42,9 @@ class ValorantMapItem extends StatelessWidget {
                   width: .infinity,
                   // height: MediaQuery.of(context).size.height * 0.25,
                   height: 200,
-                
-                  placeholder: (context, url) => Image.asset(
-                    "assets/images/placeholders/black_flag.gif",
-                
-                    fit: .fitHeight,
-                    // fit: .
-                
-                    // width: .infinity,
-                    // height: 200,
-                  ),
+
+                  placeholder: (context, url) =>
+                      Container(color: MyColors.myplaceholderGrey),
                 ),
               ),
             ),
