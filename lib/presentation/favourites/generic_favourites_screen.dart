@@ -40,7 +40,7 @@ class _GenericFavouritesScreenState<T>
             // mainAxisSize: .min,
             children: [
               SvgPicture.asset(
-                "assets/images/svgs/favourites.svg",
+                "assets/svgs/favourites.svg",
                 fit: .cover,
                 height: 300,
               ),

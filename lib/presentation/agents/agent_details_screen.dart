@@ -33,7 +33,7 @@ class _AgentDetailsScreenState extends State<AgentDetailsScreen> {
             placeholder: MemoryImage(kTransparentImage),
             fit: BoxFit.cover,
             image: const AssetImage(
-              "assets/images/backgrounds/background2.jpg",
+              "assets/images/backgrounds/agent_details_background.jpg",
             ),
           ),
           Material(
@@ -46,7 +46,7 @@ class _AgentDetailsScreenState extends State<AgentDetailsScreen> {
                 fit: BoxFit.cover,
                 memCacheHeight: 800,
                 placeholder: (context, url) =>
-                    Image.asset("assets/images/jet.gif", fit: BoxFit.cover),
+                    Container(color: MyColors.myGrey),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),

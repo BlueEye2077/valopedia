@@ -29,6 +29,7 @@ class AppDrawer extends StatelessWidget {
           Column(
             children: [
               DrawerHeader(
+                
                 margin: const .fromLTRB(0, 0, 0, 0),
                 padding: const .all(0),
                 decoration: const BoxDecoration(
@@ -36,6 +37,7 @@ class AppDrawer extends StatelessWidget {
                     fit: .cover,
                     image: AssetImage(
                       "assets/images/backgrounds/drawer_background.jpg",
+                      
                     ),
                   ),
                 ),

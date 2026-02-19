@@ -32,7 +32,7 @@ class WeaponItem extends StatelessWidget {
 
               children: [
                 Image.asset(
-                  "assets/images/backgrounds/background1.jpg",
+                  "assets/images/backgrounds/weapon_background.jpg",
                   fit: .cover,
                   height: .infinity,
                   width: .infinity,

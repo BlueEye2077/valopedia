@@ -15,7 +15,7 @@ class NoInternetWidget extends StatelessWidget {
           mainAxisSize: .min,
           children: [
             SvgPicture.asset(
-              "assets/images/svgs/no_internet.svg",
+              "assets/svgs/no_internet.svg",
               fit: .cover,
               height: 300,
             ),

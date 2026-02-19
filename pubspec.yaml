@@ -88,9 +88,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-    - assets/images/svgs/
+    - assets/svgs/
     - assets/images/backgrounds/
-    - assets/images/placeholders/
 
   fonts:
 

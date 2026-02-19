@@ -39,9 +39,9 @@ class WeaponItemSkeleton extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Color.fromARGB(84, 96, 125, 139),
               ),
-              child: Text(
+              child: const Text(
                 "1600 \$",
-                style: const TextStyle(fontSize: 18, color: MyColors.myWhite),
+                style:  TextStyle(fontSize: 18, color: MyColors.myWhite),
               ),
             ),
           ),
