@@ -6,7 +6,7 @@ import '../../../data/models/weapon/weapon.dart';
 import '../../common/app_loading_indicator.dart';
 
 class SkinCardItem extends StatelessWidget {
-  final Skins skin;
+  final WeaponSkin skin;
   const SkinCardItem({super.key, required this.skin});
 
   @override

@@ -42,7 +42,7 @@ class ValorantMapItem extends StatelessWidget {
                 height: 200,
               
                 placeholder: (context, url) =>
-                    Container(color: MyColors.myplaceholderGrey),
+                    Container(color: MyColors.myPlaceholderGrey),
               ),
             ),
             Positioned(

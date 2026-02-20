@@ -185,7 +185,7 @@ class WeaponDetailsScreen extends StatelessWidget {
   }
 
   Widget _buildSkinsCarousel() {
-    final List<Skins> skins = weapon.skins!
+    final List<WeaponSkin> skins = weapon.skins!
         .where(
           (skin) =>
               skin.displayIcon != null &&

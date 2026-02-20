@@ -9,3 +9,8 @@ class MapsLoaded extends MapsState {
   final List<ValorantMap> maps;
   MapsLoaded(this.maps);
 }
+
+class MapsError extends MapsState {
+  final String error;
+  MapsError(this.error);
+}

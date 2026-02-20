@@ -31,10 +31,6 @@ class FavouritesCubit<T> extends Cubit<FavouritesState<T>> {
   }
 
   bool isFavourite(T item) {
-    if (favourites.contains(item)) {
-      return true;
-    } else {
-      return false;
-    }
+    return favourites.contains(item);
   }
 }

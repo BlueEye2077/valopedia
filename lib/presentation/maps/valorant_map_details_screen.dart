@@ -26,7 +26,7 @@ class ValorantMapDetailsScreen extends StatelessWidget {
         maxWidthDiskCache: 1000, // Optimize disk cache
         maxHeightDiskCache: 600, // Optimize disk cache
         placeholder: (context, url) =>
-            Container(color: MyColors.myplaceholderGrey),
+            Container(color: MyColors.myPlaceholderGrey),
       ),
     );
   }

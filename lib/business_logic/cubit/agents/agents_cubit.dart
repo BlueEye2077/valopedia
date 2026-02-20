@@ -1,29 +1,29 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 import '../../../data/models/agent/agent.dart';
 import '../../../data/repository/repository.dart';
+import '../../../data/web_services/api_error_handler.dart';
 
 part 'agents_state.dart';
 
 class AgentsCubit extends Cubit<AgentsState> {
-  final Repository agentsRepository;
+  final Repository repository;
   List<Agent> allAgents = [];
 
-  AgentsCubit({required this.agentsRepository}) : super(AgentsInitial());
+  AgentsCubit({required this.repository}) : super(AgentsInitial());
 
-  void getAllAgents() {
-    // if (allAgents.isNotEmpty) {
-    //   emit(AgentsLoaded(allAgents));
-    //   print("still there");
-    //   return;
-    // } else {
-      agentsRepository.getAllAgents().then((agents) {
-        allAgents = agents;
-        emit(AgentsLoaded(allAgents));
-        return;
-      });
-    // }
+  Future<void> getAllAgents() async {
+    if (allAgents.isNotEmpty) {
+      emit(AgentsLoaded(allAgents));
+      return;
+    }
+
+    try {
+      allAgents = await repository.getAllAgents();
+      emit(AgentsLoaded(allAgents));
+    } catch (e) {
+      emit(AgentsError(getErrorMessage(e)));
+    }
   }
 }

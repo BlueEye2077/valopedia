@@ -18,31 +18,19 @@ class WebServices {
 
   // The function to get all the agents
   Future<List<dynamic>> getAllAgents() async {
-    try {
-      Response response = await dio.get("agents");
-      return response.data["data"];
-    } catch (e) {
-      return [];
-    }
+    final Response response = await dio.get("agents");
+    return response.data["data"];
   }
 
   // The function to get all the maps
   Future<List<dynamic>> getAllMaps() async {
-    try {
-      Response response = await dio.get("maps");
-      return response.data["data"];
-    } catch (e) {
-      return [];
-    }
+    final Response response = await dio.get("maps");
+    return response.data["data"];
   }
 
   // The function to get all the weapons
   Future<List<dynamic>> getAllWeapons() async {
-    try {
-      Response response = await dio.get("weapons");
-      return response.data["data"];
-    } catch (e) {
-      return [];
-    }
+    final Response response = await dio.get("weapons");
+    return response.data["data"];
   }
 }

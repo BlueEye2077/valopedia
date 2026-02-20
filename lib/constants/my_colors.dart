@@ -11,7 +11,7 @@ class MyColors {
   static const myGrey = Color(0xFF0F1922);
   static const myLightGrey = Color(0xFF1F2326);
   static const mySilver = Color(0xFFB2B4BC);
-  static const myplaceholderGrey = Color.fromARGB(240, 15, 25, 34);
+  static const myPlaceholderGrey = Color.fromARGB(240, 15, 25, 34);
 
   // Whites :)
   static const myLightYellow = Color.fromARGB(255, 238, 236, 204);

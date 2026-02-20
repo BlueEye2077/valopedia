@@ -10,6 +10,7 @@ import '../common/app_loading_indicator.dart';
 import '../common/interactive_app_bar.dart';
 import 'widgets/map_item_skeleton.dart';
 import 'widgets/maps_list_view.dart';
+import '../common/error_widget.dart';
 import '../common/no_internet_widget.dart';
 
 class MapsScreen extends StatefulWidget {
@@ -27,7 +28,7 @@ class _MapsScreenState extends State<MapsScreen>
   @override
   bool get wantKeepAlive => true;
 
-  Widget buildBlocWidget() {
+  Widget _buildBlocWidget() {
     return BlocBuilder<MapsCubit, MapsState>(
       builder: (context, state) {
         Widget child;
@@ -37,6 +38,11 @@ class _MapsScreenState extends State<MapsScreen>
           child = searchedMaps.isNotEmpty
               ? MapsListView(maps: searchedMaps)
               : MapsListView(maps: allMaps);
+        } else if (state is MapsError) {
+          child = AppErrorWidget(
+            message: state.error,
+            onRetry: () => BlocProvider.of<MapsCubit>(context).getAllMaps(),
+          );
         } else {
           child = _buildMapsSkeletonGridview();
         }
@@ -66,15 +72,14 @@ class _MapsScreenState extends State<MapsScreen>
     );
   }
 
-
-
   void _searchMap(String searchedMap) {
     setState(() {
       searchedMaps = allMaps
           .where(
-            (valorantMap) => valorantMap.displayName!.toLowerCase().trim().contains(
-              searchedMap.trim().toLowerCase(),
-            ),
+            (valorantMap) => valorantMap.displayName!
+                .toLowerCase()
+                .trim()
+                .contains(searchedMap.trim().toLowerCase()),
           )
           .toList();
     });
@@ -110,7 +115,7 @@ class _MapsScreenState extends State<MapsScreen>
                 ConnectivityResult.none,
               );
               if (connected) {
-                return buildBlocWidget();
+                return _buildBlocWidget();
               } else {
                 return const NoInternetWidget();
               }

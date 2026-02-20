@@ -9,7 +9,7 @@ class Weapon {
 
   WeaponStats? weaponStats;
   ShopData? shopData;
-  List<Skins>? skins;
+  List<WeaponSkin>? skins;
 
   Weapon.fromJson(Map<String, dynamic> json) {
     uuid = json['uuid'];
@@ -29,9 +29,9 @@ class Weapon {
         : null;
 
     if (json['skins'] != null) {
-      skins = <Skins>[];
+      skins = <WeaponSkin>[];
       json['skins'].forEach((v) {
-        skins!.add(Skins.fromJson(v));
+        skins!.add(WeaponSkin.fromJson(v));
       });
     }
   }
@@ -144,7 +144,7 @@ class GridPosition {
   }
 }
 
-class Skins {
+class WeaponSkin {
   String? uuid;
   String? displayName;
   String? themeUuid;
@@ -155,7 +155,7 @@ class Skins {
   List<Chromas>? chromas;
   List<Levels>? levels;
 
-  Skins.fromJson(Map<String, dynamic> json) {
+  WeaponSkin.fromJson(Map<String, dynamic> json) {
     uuid = json['uuid'];
     displayName = json['displayName'];
     themeUuid = json['themeUuid'];

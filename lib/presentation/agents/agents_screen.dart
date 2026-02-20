@@ -10,6 +10,7 @@ import 'widgets/agents_gridview.dart';
 import '../common/app_drawer.dart';
 import '../common/app_loading_indicator.dart';
 import '../common/interactive_app_bar.dart';
+import '../common/error_widget.dart';
 import '../common/no_internet_widget.dart';
 
 class AgentsScreen extends StatefulWidget {
@@ -33,7 +34,7 @@ class _AgentScreenState extends State<AgentsScreen>
     BlocProvider.of<AgentsCubit>(context).getAllAgents();
   }
 
-  Widget buildBlocWidget() {
+  Widget _buildBlocWidget() {
     return BlocBuilder<AgentsCubit, AgentsState>(
       builder: (context, state) {
         Widget child;
@@ -41,6 +42,11 @@ class _AgentScreenState extends State<AgentsScreen>
         if (state is AgentsLoaded) {
           allAgents = (state).agents;
           child = _buildAgentGridView();
+        } else if (state is AgentsError) {
+          child = AppErrorWidget(
+            message: state.error,
+            onRetry: () => BlocProvider.of<AgentsCubit>(context).getAllAgents(),
+          );
         } else {
           child = _buildAgentsSkeletonGridview();
         }
@@ -122,7 +128,7 @@ class _AgentScreenState extends State<AgentsScreen>
                 ConnectivityResult.none,
               );
               if (connected) {
-                return buildBlocWidget();
+                return _buildBlocWidget();
               } else {
                 return const NoInternetWidget();
               }

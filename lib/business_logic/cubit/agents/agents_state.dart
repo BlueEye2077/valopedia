@@ -9,3 +9,8 @@ class AgentsLoaded extends AgentsState {
   final List<Agent> agents;
   AgentsLoaded(this.agents);
 }
+
+class AgentsError extends AgentsState {
+  final String error;
+  AgentsError(this.error);
+}

@@ -32,9 +32,9 @@ class AppRouter {
 
   AppRouter() {
     repository = Repository(webServices: WebServices());
-    agentsCubit = AgentsCubit(agentsRepository: repository);
-    mapsCubit = MapsCubit(agentsRepository: repository);
-    weaponsCubit = WeaponsCubit(agentsRepository: repository);
+    agentsCubit = AgentsCubit(repository: repository);
+    mapsCubit = MapsCubit(repository: repository);
+    weaponsCubit = WeaponsCubit(repository: repository);
 
     favouriteAgentsCubit = FavouritesCubit<Agent>();
     favouriteMapsCubit = FavouritesCubit<ValorantMap>();

@@ -8,7 +8,7 @@ class AllWeaponSkinsScreen extends StatelessWidget {
   const AllWeaponSkinsScreen({super.key, required this.weapon});
 
   Widget _buildSkinsGrid() {
-    final List<Skins> skins = weapon.skins!
+    final List<WeaponSkin> skins = weapon.skins!
         .where((skin) => skin.displayIcon != null)
         .toList();
     return SingleChildScrollView(

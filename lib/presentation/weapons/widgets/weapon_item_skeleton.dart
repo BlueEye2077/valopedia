@@ -17,7 +17,7 @@ class WeaponItemSkeleton extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           // Background placeholder
-          Container(color: MyColors.myplaceholderGrey),
+          Container(color: MyColors.myPlaceholderGrey),
 
           // Weapon name placeholder
           const Positioned(

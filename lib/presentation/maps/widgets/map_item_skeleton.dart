@@ -14,7 +14,7 @@ class MapItemSkeleton extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       margin: const EdgeInsets.all(8),
       child: Container(
-        color: MyColors.myplaceholderGrey,
+        color: MyColors.myPlaceholderGrey,
         child: Stack(
           // alignment: Alignment.bottomLeft,
           children: [

@@ -7,6 +7,7 @@ import '../../data/models/weapon/weapon.dart';
 import '../common/app_drawer.dart';
 import '../common/app_loading_indicator.dart';
 import '../common/interactive_app_bar.dart';
+import '../common/error_widget.dart';
 import '../common/no_internet_widget.dart';
 import 'widgets/weapon_item_skeleton.dart';
 import 'widgets/weapons_list_view.dart';
@@ -41,6 +42,12 @@ class _WeaponsScreenState extends State<WeaponsScreen>
           child = searchedWeapons.isNotEmpty
               ? WeaponsListView(weapons: searchedWeapons)
               : WeaponsListView(weapons: allWeapons);
+        } else if (state is WeaponsError) {
+          child = AppErrorWidget(
+            message: state.error,
+            onRetry: () =>
+                BlocProvider.of<WeaponsCubit>(context).getAllWeapons(),
+          );
         } else {
           child = _buildWeaponsSkeletonGridview();
         }
