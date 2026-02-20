@@ -2,12 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
-
+import 'package:valopedia/presentation/common/divider_with_space.dart';
+import 'package:valopedia/presentation/maps/widgets/no_map_icon_card.dart';
 import '../../business_logic/cubit/favourites/favourites_cubit.dart';
 import '../../constants/my_colors.dart';
 import '../../data/models/map/valorant_map.dart';
 import '../common/custom_sliver_app_bar.dart';
-import '../common/details_divider.dart';
 import '../common/section_title.dart';
 import 'widgets/image_with_corners_stack.dart';
 import 'widgets/info_square_row.dart';
@@ -41,70 +41,76 @@ class ValorantMapDetailsScreen extends StatelessWidget {
         Column(
           children: [
             InfoSquareRow(valorantMap: valorantMap),
-            const SizedBox(height: 20),
+
             Padding(
               padding: const .all(12),
 
-              child: Column(
-                children: [
-                  valorantMap.displayIcon != null
-                      ? Column(
-                          children: [
-                            const SectionTitle(title: "Map Icon"),
-                            const SizedBox(height: 6),
-                            MapIconCard(
-                              height: 380,
-                              child: ImageWithCornersStack(
-                                valorantMap: valorantMap,
-                              ),
-                            ),
-                          ],
-                        )
-                      : const SizedBox.shrink(),
+              child:
+                  valorantMap.displayIcon == null &&
+                      valorantMap.stylizedBackgroundImage == null &&
+                      valorantMap.premierBackgroundImage == null
+                  ? const NoMapIconCard()
+                  : Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        valorantMap.displayIcon != null
+                            ? Column(
+                                children: [
+                                  const SectionTitle(title: "Map Icon"),
+                                  const SizedBox(height: 6),
+                                  MapIconCard(
+                                    height: 380,
+                                    child: ImageWithCornersStack(
+                                      valorantMap: valorantMap,
+                                    ),
+                                  ),
+                                  const DividerWithSpace(),
+                                ],
+                              )
+                            : const SizedBox.shrink(),
 
-                  const DetailsDivider(),
+                        valorantMap.stylizedBackgroundImage != null
+                            ? Column(
+                                children: [
+                                  const SectionTitle(
+                                    title: "Stylized Background Image",
+                                  ),
+                                  const SizedBox(height: 6),
+                                  MapIconCard(
+                                    height: 230,
+                                    child: FadeInImage.memoryNetwork(
+                                      fit: .cover,
+                                      placeholder: kTransparentImage,
+                                      image:
+                                          valorantMap.stylizedBackgroundImage!,
+                                    ),
+                                  ),
+                                  const DividerWithSpace(),
+                                ],
+                              )
+                            : const SizedBox.shrink(),
 
-                  valorantMap.stylizedBackgroundImage != null
-                      ? Column(
-                          children: [
-                            const SectionTitle(
-                              title: "Stylized Background Image",
-                            ),
-                            const SizedBox(height: 6),
-                            MapIconCard(
-                              height: 230,
-                              child: FadeInImage.memoryNetwork(
-                                fit: .cover,
-                                placeholder: kTransparentImage,
-                                image: valorantMap.stylizedBackgroundImage!,
-                              ),
-                            ),
-                          ],
-                        )
-                      : const SizedBox.shrink(),
-
-                  const DetailsDivider(),
-
-                  valorantMap.premierBackgroundImage != null
-                      ? Column(
-                          children: [
-                            const SectionTitle(
-                              title: "Premier Background Image",
-                            ),
-                            const SizedBox(height: 6),
-                            MapIconCard(
-                              height: 230,
-                              child: FadeInImage.memoryNetwork(
-                                fit: .cover,
-                                placeholder: kTransparentImage,
-                                image: valorantMap.premierBackgroundImage!,
-                              ),
-                            ),
-                          ],
-                        )
-                      : const SizedBox.shrink(),
-                ],
-              ),
+                        valorantMap.premierBackgroundImage != null
+                            ? Column(
+                                children: [
+                                  const SectionTitle(
+                                    title: "Premier Background Image",
+                                  ),
+                                  const SizedBox(height: 6),
+                                  MapIconCard(
+                                    height: 230,
+                                    child: FadeInImage.memoryNetwork(
+                                      fit: .cover,
+                                      placeholder: kTransparentImage,
+                                      image:
+                                          valorantMap.premierBackgroundImage!,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : const SizedBox.shrink(),
+                      ],
+                    ),
             ),
           ],
         ),

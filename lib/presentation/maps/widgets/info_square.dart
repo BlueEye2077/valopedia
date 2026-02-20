@@ -20,21 +20,21 @@ class InfoSquare extends StatelessWidget {
         ),
         child: Padding(
           padding: const .all(6),
-          child: Center(
-            child: Column(
-              mainAxisSize: .min,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(fontSize: 12, color: MyColors.myRed),
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  data,
-                  style: const TextStyle(fontSize: 14, color: MyColors.myWhite),
-                ),
-              ],
-            ),
+          child: Column(
+            mainAxisAlignment: .start,
+            children: [
+              const SizedBox(height: 10),
+              Text(
+                title,
+                style: const TextStyle(fontSize: 16, color: MyColors.myRed),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                data,
+                textAlign: .center,
+                style: const TextStyle(fontSize: 14, color: MyColors.myWhite),
+              ),
+            ],
           ),
         ),
       ),

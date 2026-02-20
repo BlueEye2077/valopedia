@@ -117,7 +117,7 @@ class AllWeaponStatsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          weapon.displayName.toString(),
+          "${weapon.displayName} Stats",
           style: const TextStyle(color: MyColors.myWhite),
         ),
         backgroundColor: MyColors.myDarkRed,
