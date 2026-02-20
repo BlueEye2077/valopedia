@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../constants/my_colors.dart';
 import '../../../data/models/weapon/weapon.dart';
 import '../../common/section_title.dart';

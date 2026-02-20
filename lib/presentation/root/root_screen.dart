@@ -2,11 +2,12 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/rpg_awesome_icons.dart';
+
 import '../../constants/my_colors.dart';
 import '../agents/agents_screen.dart';
+import '../common/app_drawer.dart';
 import '../maps/maps_screen.dart';
 import '../weapons/weapons_screen.dart';
-import '../common/app_drawer.dart';
 
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key});

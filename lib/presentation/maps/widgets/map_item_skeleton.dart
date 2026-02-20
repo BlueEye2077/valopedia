@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+
 import '../../../constants/my_colors.dart';
 
 class MapItemSkeleton extends StatelessWidget {

@@ -2,14 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
-import '../common/custom_sliver_app_bar.dart';
-import '../common/section_title.dart';
 
 import '../../business_logic/cubit/favourites/favourites_cubit.dart';
 import '../../constants/my_colors.dart';
 import '../../data/models/agent/agent.dart';
-import 'widgets/ability_tile.dart';
+import '../common/custom_sliver_app_bar.dart';
 import '../common/details_divider.dart';
+import '../common/section_title.dart';
+import 'widgets/ability_tile.dart';
 import 'widgets/role_card.dart';
 
 class AgentDetailsScreen extends StatefulWidget {

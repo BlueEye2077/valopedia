@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../constants/my_colors.dart';
 
 class WeaponItemSkeleton extends StatelessWidget {

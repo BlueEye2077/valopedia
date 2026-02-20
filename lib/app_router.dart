@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'business_logic/cubit/maps/maps_cubit.dart';
-import 'business_logic/cubit/weapons/weapons_cubit.dart';
-import 'data/models/map/valorant_map.dart';
-import 'data/models/weapon/weapon.dart';
-import 'presentation/weapons/all_weapon_skins_screen.dart';
-import 'presentation/weapons/all_weapon_stats_screen.dart';
-import 'presentation/favourites/favourite_agents_screen.dart';
-import 'presentation/favourites/favourite_maps_screen.dart';
-import 'presentation/favourites/favourite_weapons_screen.dart';
-import 'presentation/root/root_screen.dart';
-import 'presentation/maps/valorant_map_details_screen.dart';
-import 'presentation/weapons/weapon_details_screen.dart';
 
 import 'business_logic/cubit/agents/agents_cubit.dart';
 import 'business_logic/cubit/favourites/favourites_cubit.dart';
+import 'business_logic/cubit/maps/maps_cubit.dart';
+import 'business_logic/cubit/weapons/weapons_cubit.dart';
 import 'constants/strings.dart';
 import 'data/models/agent/agent.dart';
+import 'data/models/map/valorant_map.dart';
+import 'data/models/weapon/weapon.dart';
 import 'data/repository/repository.dart';
 import 'data/web_services/web_services.dart';
 import 'presentation/agents/agent_details_screen.dart';
+import 'presentation/favourites/favourite_agents_screen.dart';
+import 'presentation/favourites/favourite_maps_screen.dart';
+import 'presentation/favourites/favourite_weapons_screen.dart';
+import 'presentation/maps/valorant_map_details_screen.dart';
+import 'presentation/root/root_screen.dart';
+import 'presentation/weapons/all_weapon_skins_screen.dart';
+import 'presentation/weapons/all_weapon_stats_screen.dart';
+import 'presentation/weapons/weapon_details_screen.dart';
 
 class AppRouter {
   late Repository repository;

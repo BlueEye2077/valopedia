@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+
 import '../../constants/my_colors.dart';
 import '../../constants/strings.dart';
 import '../common/app_loading_indicator.dart';

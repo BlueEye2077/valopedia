@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
 import '../../../constants/my_colors.dart';
 import '../../../constants/strings.dart';
 import '../../../data/models/map/valorant_map.dart';

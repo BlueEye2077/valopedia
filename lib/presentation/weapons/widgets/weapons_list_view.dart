@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../data/models/weapon/weapon.dart';
 import 'weapon_item.dart';
 

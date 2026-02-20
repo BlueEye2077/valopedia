@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../../data/models/agent/agent.dart';
-import 'generic_favourites_screen.dart';
 import '../agents/widgets/agents_gridview.dart';
+import 'generic_favourites_screen.dart';
 
 class FavouriteAgentsScreen extends StatelessWidget {
   const FavouriteAgentsScreen({super.key});

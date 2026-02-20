@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:valopedia/presentation/agents/widgets/agent_item_skeleton.dart';
+
 import '../../business_logic/cubit/agents/agents_cubit.dart';
 import '../../constants/my_colors.dart';
 import '../../data/models/agent/agent.dart';
-import 'widgets/agents_gridview.dart';
 import '../common/app_drawer.dart';
 import '../common/app_loading_indicator.dart';
-import '../common/interactive_app_bar.dart';
 import '../common/error_widget.dart';
+import '../common/interactive_app_bar.dart';
 import '../common/no_internet_widget.dart';
+import 'widgets/agent_item_skeleton.dart';
+import 'widgets/agents_gridview.dart';
 
 class AgentsScreen extends StatefulWidget {
   const AgentsScreen({super.key});
