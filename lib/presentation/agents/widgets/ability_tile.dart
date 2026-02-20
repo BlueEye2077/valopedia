@@ -6,7 +6,7 @@ import '../../../data/models/agent/ability.dart';
 class AbilityTile extends StatelessWidget {
   final Ability ability;
 
-  const AbilityTile({super.key, required, required this.ability});
+  const AbilityTile({super.key, required this.ability});
 
   @override
   Widget build(BuildContext context) {

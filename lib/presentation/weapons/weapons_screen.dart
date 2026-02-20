@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_offline/flutter_offline.dart';
-import 'package:skeletonizer/skeletonizer.dart';
+
 import '../../business_logic/cubit/weapons/weapons_cubit.dart';
 import '../../data/models/weapon/weapon.dart';
 import '../common/app_drawer.dart';
 import '../common/app_loading_indicator.dart';
-import '../common/interactive_app_bar.dart';
 import '../common/error_widget.dart';
+import '../common/interactive_app_bar.dart';
 import '../common/no_internet_widget.dart';
-import 'widgets/weapon_item_skeleton.dart';
-import 'widgets/weapons_list_view.dart';
+import 'widgets/weapons_grid_view.dart';
+import 'widgets/weapons_skeleton_grid_view.dart';
 
 class WeaponsScreen extends StatefulWidget {
   const WeaponsScreen({super.key});
@@ -32,16 +32,16 @@ class _WeaponsScreenState extends State<WeaponsScreen>
 
   @override
   bool get wantKeepAlive => true;
+
   Widget _buildBlocWidget() {
     return BlocBuilder<WeaponsCubit, WeaponsState>(
       builder: (context, state) {
         Widget child;
-
         if (state is WeaponsLoaded) {
           allWeapons = (state).weapons;
           child = searchedWeapons.isNotEmpty
-              ? WeaponsListView(weapons: searchedWeapons)
-              : WeaponsListView(weapons: allWeapons);
+              ? WeaponsGridView(weapons: searchedWeapons)
+              : WeaponsGridView(weapons: allWeapons);
         } else if (state is WeaponsError) {
           child = AppErrorWidget(
             message: state.error,
@@ -49,43 +49,13 @@ class _WeaponsScreenState extends State<WeaponsScreen>
                 BlocProvider.of<WeaponsCubit>(context).getAllWeapons(),
           );
         } else {
-          child = _buildWeaponsSkeletonGridview();
+          child = const WeaponsSkeletonGridView();
         }
-
         return AnimatedSwitcher(
           duration: const Duration(seconds: 1),
           child: child,
         );
       },
-    );
-  }
-
-  Widget _buildWeaponsSkeletonGridview() {
-    return Skeletonizer(
-      key: const ValueKey('skeleton'),
-      enabled: true,
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(4),
-        child: Column(
-          children: [
-            GridView.builder(
-              physics: const ClampingScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: 12,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 3 / 2,
-                crossAxisSpacing: 2,
-                mainAxisSpacing: 2,
-              ),
-              padding: EdgeInsets.zero,
-              itemBuilder: (context, index) {
-                return const WeaponItemSkeleton();
-              },
-            ),
-          ],
-        ),
-      ),
     );
   }
 

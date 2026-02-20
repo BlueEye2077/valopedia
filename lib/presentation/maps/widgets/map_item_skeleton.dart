@@ -17,7 +17,6 @@ class MapItemSkeleton extends StatelessWidget {
       child: Container(
         color: MyColors.myPlaceholderGrey,
         child: Stack(
-          // alignment: Alignment.bottomLeft,
           children: [
             // Map splash image placeholder
             Skeleton.ignore(

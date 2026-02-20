@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data/models/weapon/weapon.dart';
-import '../weapons/widgets/weapons_list_view.dart';
+import '../weapons/widgets/weapons_grid_view.dart';
 import 'generic_favourites_screen.dart';
 
 class FavouriteWeaponsScreen extends StatelessWidget {
@@ -12,7 +12,7 @@ class FavouriteWeaponsScreen extends StatelessWidget {
     return GenericFavouritesScreen(
       title: "Favourite Weapons",
       hint: "Find A Weapon",
-      viewBuilder: (List<Weapon> weapons) => WeaponsListView(weapons: weapons),
+      viewBuilder: (List<Weapon> weapons) => WeaponsGridView(weapons: weapons),
       searchFilter: (Weapon weapon, query) => weapon.displayName!
           .toLowerCase()
           .trim()

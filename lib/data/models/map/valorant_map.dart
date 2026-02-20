@@ -16,7 +16,6 @@ class ValorantMap {
   num? xScalarToAdd;
   num? yScalarToAdd;
 
-
   ValorantMap.fromJson(Map<String, dynamic> json) {
     uuid = json['uuid'];
     displayName = json['displayName'];

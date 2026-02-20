@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_offline/flutter_offline.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../business_logic/cubit/agents/agents_cubit.dart';
 import '../../constants/my_colors.dart';
@@ -11,7 +10,7 @@ import '../common/app_loading_indicator.dart';
 import '../common/error_widget.dart';
 import '../common/interactive_app_bar.dart';
 import '../common/no_internet_widget.dart';
-import 'widgets/agent_item_skeleton.dart';
+import 'widgets/agent_skeleton_gridview.dart';
 import 'widgets/agents_gridview.dart';
 
 class AgentsScreen extends StatefulWidget {
@@ -42,14 +41,16 @@ class _AgentScreenState extends State<AgentsScreen>
 
         if (state is AgentsLoaded) {
           allAgents = (state).agents;
-          child = _buildAgentGridView();
+          child = AgentsGridview(
+            items: searchedAgents.isNotEmpty ? searchedAgents : allAgents,
+          );
         } else if (state is AgentsError) {
           child = AppErrorWidget(
             message: state.error,
             onRetry: () => BlocProvider.of<AgentsCubit>(context).getAllAgents(),
           );
         } else {
-          child = _buildAgentsSkeletonGridview();
+          child = const AgentSkeletonGridview();
         }
 
         return AnimatedSwitcher(
@@ -57,38 +58,6 @@ class _AgentScreenState extends State<AgentsScreen>
           child: child,
         );
       },
-    );
-  }
-
-  Widget _buildAgentGridView() {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          AgentsGridview(
-            items: searchedAgents.isNotEmpty ? searchedAgents : allAgents,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAgentsSkeletonGridview() {
-    return Skeletonizer(
-      key: const ValueKey('skeleton'),
-      enabled: true,
-      child: GridView.builder(
-        itemCount: 6,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 2 / 3,
-          crossAxisSpacing: 2,
-          mainAxisSpacing: 2,
-        ),
-        padding: EdgeInsets.zero,
-        itemBuilder: (context, index) {
-          return const AgentItemSkeleton();
-        },
-      ),
     );
   }
 

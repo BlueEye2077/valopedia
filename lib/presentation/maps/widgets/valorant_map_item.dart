@@ -25,7 +25,6 @@ class ValorantMapItem extends StatelessWidget {
           arguments: valorantMap,
         ),
         child: Stack(
-          // alignment: .centerLeft,
           alignment: .bottomLeft,
           children: [
             Hero(
@@ -39,7 +38,6 @@ class ValorantMapItem extends StatelessWidget {
                 maxWidthDiskCache: 1000, // Optimize disk cache
                 maxHeightDiskCache: 600, // Optimize disk cache
                 width: .infinity,
-                // height: MediaQuery.of(context).size.height * 0.25,
                 height: 200,
               
                 placeholder: (context, url) =>

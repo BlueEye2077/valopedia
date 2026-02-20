@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_offline/flutter_offline.dart';
-import 'package:skeletonizer/skeletonizer.dart';
+
 import '../../business_logic/cubit/maps/maps_cubit.dart';
 import '../../constants/my_colors.dart';
 import '../../data/models/map/valorant_map.dart';
 import '../common/app_drawer.dart';
 import '../common/app_loading_indicator.dart';
-import '../common/interactive_app_bar.dart';
-import 'widgets/map_item_skeleton.dart';
-import 'widgets/maps_list_view.dart';
 import '../common/error_widget.dart';
+import '../common/interactive_app_bar.dart';
 import '../common/no_internet_widget.dart';
+import 'widgets/maps_list_view.dart';
+import 'widgets/maps_skeleton_list_view.dart';
 
 class MapsScreen extends StatefulWidget {
   const MapsScreen({super.key});
@@ -44,7 +44,7 @@ class _MapsScreenState extends State<MapsScreen>
             onRetry: () => BlocProvider.of<MapsCubit>(context).getAllMaps(),
           );
         } else {
-          child = _buildMapsSkeletonGridview();
+          child = const MapsSkeletonListView();
         }
 
         return AnimatedSwitcher(
@@ -52,23 +52,6 @@ class _MapsScreenState extends State<MapsScreen>
           child: child,
         );
       },
-    );
-  }
-
-  Widget _buildMapsSkeletonGridview() {
-    return Skeletonizer(
-      key: const ValueKey('skeleton'),
-      enabled: true,
-      child: SingleChildScrollView(
-        child: ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: 4,
-          itemBuilder: (context, index) {
-            return const MapItemSkeleton();
-          },
-        ),
-      ),
     );
   }
 

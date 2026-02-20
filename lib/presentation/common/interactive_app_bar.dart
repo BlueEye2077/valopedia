@@ -75,10 +75,10 @@ class _InteractiveAppBarState extends State<InteractiveAppBar> {
   }
 
   void _startSearching() {
-    // creats another layer on top of the app bar
+    // creates another layer on top of the app bar
     ModalRoute.of(
       context,
-    )!.addLocalHistoryEntry(LocalHistoryEntry(onRemove:_stopSearching,));
+    )!.addLocalHistoryEntry(LocalHistoryEntry(onRemove: _stopSearching));
 
     setState(() {
       _isSearching = true;

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-
 class MyFonts {
-  static const TextStyle fontDrukWideOutlinedStyle =  TextStyle(
+  static const TextStyle fontDrukWideOutlinedStyle = TextStyle(
     fontFamily: "DrukWideOutlined",
     fontSize: 32,
     color: Colors.white,
@@ -15,6 +14,4 @@ class MyFonts {
     color: Colors.red,
     fontWeight: FontWeight.bold,
   );
-
-  
 }

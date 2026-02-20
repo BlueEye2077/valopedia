@@ -10,19 +10,17 @@ class MapsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-    SingleChildScrollView(
-        child: ListView.builder(
-          addAutomaticKeepAlives: true,
-          addRepaintBoundaries: true,
-          shrinkWrap: true, // To be compatible with SingleChildScrollView
-          cacheExtent: 2000,
-          physics: const BouncingScrollPhysics(),
-          itemCount: maps.length,
-          itemBuilder: (context, index) =>
-              ValorantMapItem(valorantMap: maps[index]),
-        ),
-      
+    return SingleChildScrollView(
+      child: ListView.builder(
+        addAutomaticKeepAlives: true,
+        addRepaintBoundaries: true,
+        shrinkWrap: true, // To be compatible with SingleChildScrollView
+        cacheExtent: 2000,
+        physics: const BouncingScrollPhysics(),
+        itemCount: maps.length,
+        itemBuilder: (context, index) =>
+            ValorantMapItem(valorantMap: maps[index]),
+      ),
     );
   }
 }

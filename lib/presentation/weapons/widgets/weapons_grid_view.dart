@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import '../../../data/models/weapon/weapon.dart';
 import 'weapon_item.dart';
 
-class WeaponsListView extends StatelessWidget {
+class WeaponsGridView extends StatelessWidget {
   final List<Weapon> weapons;
 
-  const WeaponsListView({super.key, required this.weapons});
+  const WeaponsGridView({super.key, required this.weapons});
 
   @override
   Widget build(BuildContext context) {

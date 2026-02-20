@@ -37,7 +37,6 @@ class _GenericFavouritesScreenState<T>
         child: Padding(
           padding: const .all(16),
           child: Column(
-            // mainAxisSize: .min,
             children: [
               SvgPicture.asset(
                 "assets/svgs/favourites.svg",

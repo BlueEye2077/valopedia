@@ -8,9 +8,9 @@ import '../../constants/my_colors.dart';
 import '../../data/models/agent/agent.dart';
 import '../common/custom_sliver_app_bar.dart';
 import '../common/details_divider.dart';
-import '../common/section_title.dart';
-import 'widgets/ability_tile.dart';
+import 'widgets/abilities_section.dart';
 import 'widgets/role_card.dart';
+import 'widgets/section_with_description.dart';
 
 class AgentDetailsScreen extends StatefulWidget {
   final Agent agent;
@@ -39,50 +39,17 @@ class _AgentDetailsScreenState extends State<AgentDetailsScreen> {
           type: MaterialType.transparency,
           child: Hero(
             tag: widget.agent.uuid!,
-    
+
             child: CachedNetworkImage(
               imageUrl: widget.agent.fullPortrait!,
               fit: BoxFit.cover,
               memCacheHeight: 800,
-              placeholder: (context, url) =>
-                  Container(color: MyColors.myGrey),
+              placeholder: (context, url) => Container(color: MyColors.myGrey),
               errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildSectionWithDescription(String title, String description) {
-    return Container(
-      margin: const .all(12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SectionTitle(title: title),
-          const SizedBox(height: 8),
-          Text(
-            description,
-            style: const TextStyle(color: MyColors.mySilver, fontSize: 16),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAbilitesSection() {
-    return Container(
-      margin: const .all(12),
-      child: Column(
-        crossAxisAlignment: .start,
-        children: [
-          const SectionTitle(title: "Abilities"),
-          ...widget.agent.abilities.map(
-            (ability) => AbilityTile(ability: ability),
-          ),
-        ],
-      ),
     );
   }
 
@@ -98,17 +65,17 @@ class _AgentDetailsScreenState extends State<AgentDetailsScreen> {
               indent: 0,
               endIndent: 0,
             ),
-        
-            _buildSectionWithDescription(
-              "Biography",
-              widget.agent.description!,
+
+            SectionWithDescription(
+              title: "Biography",
+              description: widget.agent.description!,
             ),
             const DetailsDivider(),
-        
+
             RoleCard(agent: widget.agent),
             const DetailsDivider(),
-        
-            _buildAbilitesSection(),
+
+            AbilitiesSection(agentAbilities: widget.agent.abilities),
           ],
         ),
       ]),

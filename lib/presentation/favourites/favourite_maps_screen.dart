@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../../data/models/map/valorant_map.dart';
-import 'generic_favourites_screen.dart';
 import '../maps/widgets/maps_list_view.dart';
+import 'generic_favourites_screen.dart';
 
 class FavouriteMapsScreen extends StatelessWidget {
   const FavouriteMapsScreen({super.key});

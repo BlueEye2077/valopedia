@@ -9,22 +9,28 @@ class AgentsGridview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      physics: const ClampingScrollPhysics(),
-      addAutomaticKeepAlives: true,
-      addRepaintBoundaries: true,
-      shrinkWrap: true,
-      cacheExtent: 2000,
-      itemCount: items.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 2 / 3,
-        crossAxisSpacing: 2,
-        mainAxisSpacing: 2,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          GridView.builder(
+            physics: const ClampingScrollPhysics(),
+            addAutomaticKeepAlives: true,
+            addRepaintBoundaries: true,
+            shrinkWrap: true,
+            cacheExtent: 2000,
+            itemCount: items.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 2 / 3,
+              crossAxisSpacing: 2,
+              mainAxisSpacing: 2,
+            ),
+            padding: EdgeInsets.zero,
+            itemBuilder: (context, index) =>
+                AgentItem(key: ValueKey(items[index].uuid), agent: items[index]),
+          ),
+        ],
       ),
-      padding: EdgeInsets.zero,
-      itemBuilder: (context, index) =>
-          AgentItem(key: ValueKey(items[index].uuid), agent: items[index]),
     );
   }
 }

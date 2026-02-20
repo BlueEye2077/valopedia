@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../constants/my_colors.dart';
 import '../../../data/models/agent/agent.dart';
 import '../../common/details_divider.dart';

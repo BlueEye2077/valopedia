@@ -23,7 +23,6 @@ class WeaponItem extends StatelessWidget {
             width: .infinity,
             height: .infinity,
             decoration: BoxDecoration(
-              // borderRadius: BorderRadius.circular(25) ,
               border: Border.all(width: 1, color: Colors.blueGrey),
             ),
             margin: const .all(6),
