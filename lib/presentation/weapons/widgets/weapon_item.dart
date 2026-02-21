@@ -24,6 +24,7 @@ class WeaponItem extends StatelessWidget {
             height: .infinity,
             decoration: BoxDecoration(
               border: Border.all(width: 1, color: Colors.blueGrey),
+              color: MyColors.myGrey,
             ),
             margin: const .all(6),
             child: Stack(
@@ -43,6 +44,9 @@ class WeaponItem extends StatelessWidget {
                     imageUrl: weapon.displayIcon!,
                     fit: BoxFit.cover,
                     memCacheHeight: 600,
+                    memCacheWidth: 800, // Optimize memory cache
+                    maxWidthDiskCache: 1000, // Optimize disk cache
+                    maxHeightDiskCache: 600, // Optimize disk cache
                   ),
                 ),
                 Positioned(

@@ -48,7 +48,7 @@ class _MapsScreenState extends State<MapsScreen>
         }
 
         return AnimatedSwitcher(
-          duration: const Duration(seconds: 1),
+          duration: const Duration(milliseconds: 500),
           child: child,
         );
       },

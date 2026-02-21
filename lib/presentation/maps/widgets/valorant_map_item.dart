@@ -15,7 +15,7 @@ class ValorantMapItem extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       elevation: 2,
-      color: MyColors.mySilver,
+      color: MyColors.myGrey,
       clipBehavior: Clip.hardEdge,
       margin: const .all(8),
       child: InkWell(
@@ -39,9 +39,9 @@ class ValorantMapItem extends StatelessWidget {
                 maxHeightDiskCache: 600, // Optimize disk cache
                 width: .infinity,
                 height: 200,
-              
-                placeholder: (context, url) =>
-                    Container(color: MyColors.myPlaceholderGrey),
+
+                // placeholder: (context, url) =>
+                //     Container(color: MyColors.myPlaceholderGrey),
               ),
             ),
             Positioned(

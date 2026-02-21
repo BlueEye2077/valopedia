@@ -20,6 +20,7 @@ class _RootScreenState extends State<RootScreen> {
   final PageController _pageController = PageController(initialPage: 1);
   int _currentIndex = 1;
   late List<Widget> _appScreens;
+  DateTime? _lastBackPressTime;
 
   @override
   void initState() {
@@ -56,19 +57,51 @@ class _RootScreenState extends State<RootScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true,
-      drawer: const AppDrawer(),
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
 
-      body: PageView(
-        controller: _pageController,
-        children: _appScreens,
-        onPageChanged: (index) => setState(() {
-          _currentIndex = index;
-        }),
+        final now = DateTime.now();
+        if (_lastBackPressTime != null &&
+            now.difference(_lastBackPressTime!) < const Duration(seconds: 2)) {
+          Navigator.of(context).pop();
+          return;
+        }
+
+        _lastBackPressTime = now;
+        ScaffoldMessenger.of(context).clearSnackBars();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            padding: .symmetric(horizontal: 6, vertical: 14),
+            behavior: .floating,
+            margin: .symmetric(horizontal: 60, vertical: 22),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+            ),
+            content: Text(
+              'Press back again to exit',
+              textAlign: .center,
+              style: TextStyle(fontSize: 14, color: MyColors.myWhite),
+            ),
+            duration: Duration(seconds: 1),
+          ),
+        );
+      },
+      child: Scaffold(
+        extendBody: true,
+        drawer: const AppDrawer(),
+
+        body: PageView(
+          controller: _pageController,
+          children: _appScreens,
+          onPageChanged: (index) => setState(() {
+            _currentIndex = index;
+          }),
+        ),
+
+        bottomNavigationBar: _buildBottomNavigationBar(),
       ),
-
-      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 }

@@ -35,9 +35,6 @@ dependencies:
   # A carousel slider widget, support infinite scroll and custom child widget.
   carousel_slider: ^5.1.2
   
-  # Cupertino icons for Flutter.
-  cupertino_icons: ^1.0.8
-  
   # A navigation bar widget with a curved bottom.
   curved_navigation_bar: ^1.0.6
   

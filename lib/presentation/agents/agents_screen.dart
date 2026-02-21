@@ -54,7 +54,7 @@ class _AgentScreenState extends State<AgentsScreen>
         }
 
         return AnimatedSwitcher(
-          duration: const Duration(seconds: 1),
+          duration: const Duration(milliseconds: 500),
           child: child,
         );
       },
