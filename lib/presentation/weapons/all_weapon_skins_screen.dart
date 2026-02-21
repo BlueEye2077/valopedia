@@ -12,26 +12,20 @@ class AllWeaponSkinsScreen extends StatelessWidget {
     final List<WeaponSkin> skins = weapon.skins!
         .where((skin) => skin.displayIcon != null)
         .toList();
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const ClampingScrollPhysics(),
-            padding: const .all(12),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 3 / 2,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
-            ),
-            itemBuilder: (context, index) {
-              return SkinCardItem(skin: skins[index]);
-            },
-            itemCount: skins.length,
-          ),
-        ],
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const ClampingScrollPhysics(),
+      padding: const .all(12),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 3 / 2,
+        mainAxisSpacing: 12,
+        crossAxisSpacing: 12,
       ),
+      itemBuilder: (context, index) {
+        return SkinCardItem(skin: skins[index]);
+      },
+      itemCount: skins.length,
     );
   }
 

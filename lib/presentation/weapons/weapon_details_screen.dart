@@ -47,43 +47,49 @@ class WeaponDetailsScreen extends StatelessWidget {
     );
   }
 
+  List<Widget> _buildWeaponStats(WeaponStats weaponStats) {
+    return [
+      const SizedBox(height: 12),
+      WeaponSectionTitle(
+        title: "Statistics",
+        weapon: weapon,
+        route: allWeaponStatsScreen,
+      ),
+      const SizedBox(height: 12),
+      StatsSnapshot(weaponStats: weaponStats),
+      const DividerWithSpace(),
+      const SectionTitle(title: "Damage Ranges", textAlign: .left),
+      const SizedBox(height: 12),
+      DamageRangesTable(weaponStats: weaponStats),
+    ];
+  }
+
   Widget _buildSliverBody() {
     var weaponStats = weapon.weaponStats;
     return SliverList(
       delegate: SliverChildListDelegate([
-        weaponStats != null
-            ? Container(
-                margin: const .symmetric(vertical: 12, horizontal: 16),
-                child: Column(
-                  crossAxisAlignment: .start,
-                  children: [
-                    const SizedBox(height: 20),
-                    WeaponSectionTitle(
-                      title: "Statistics",
-                      weapon: weapon,
-                      route: allWeaponStatsScreen,
-                    ),
-                    const SizedBox(height: 12),
-                    StatsSnapshot(weaponStats: weaponStats),
-                    const DividerWithSpace(),
-                    const SectionTitle(
-                      title: "Damage Ranges",
-                      textAlign: .left,
-                    ),
-                    const SizedBox(height: 12),
-                    DamageRangesTable(weaponStats: weaponStats),
-                    const DividerWithSpace(),
-                    WeaponSectionTitle(
-                      title: "Skins",
-                      weapon: weapon,
-                      route: allWeaponSkinsScreen,
-                    ),
-                    const SizedBox(height: 12),
-                    SkinsCarousel(weapon: weapon),
-                  ],
-                ),
-              )
-            : const NoWeaponStats(),
+        Container(
+          margin: const .symmetric(vertical: 12, horizontal: 16),
+          child: Column(
+            crossAxisAlignment: .start,
+            children: [
+              if (weaponStats != null)
+                ..._buildWeaponStats(weaponStats)
+              else
+                const NoWeaponStats(),
+
+              const DividerWithSpace(),
+              WeaponSectionTitle(
+                title: "Skins",
+                weapon: weapon,
+                route: allWeaponSkinsScreen,
+              ),
+              const SizedBox(height: 12),
+
+              SkinsCarousel(weapon: weapon),
+            ],
+          ),
+        ),
       ]),
     );
   }
